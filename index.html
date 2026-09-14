@@ -2146,6 +2146,49 @@ footer{
 
 @media (max-width:700px){
 
+    /* MOBILE USES THE EXACT DESKTOP THEME */
+    body{
+        background:var(--bg);
+        color:var(--text);
+    }
+
+    .navbar,
+    .hero,
+    .introduction,
+    .vision,
+    .product,
+    .approach,
+    .technology,
+    .founder-section,
+    .cta,
+    footer{
+        background-color:var(--bg);
+    }
+
+    .vision-card,
+    .product-card,
+    .step,
+    .tech-item,
+    .founder-card,
+    .cta-box{
+        border-color:var(--line);
+    }
+
+    .hero h1,
+    .intro-title,
+    .section-heading h2,
+    .product-header h2,
+    .approach-title,
+    .tech-head h2,
+    .founder-title h2,
+    .cta-box h2,
+    .product-info h3,
+    .founder-name{
+        text-shadow:
+            0 0 10px rgba(25,169,238,.18),
+            0 0 24px rgba(25,169,238,.10);
+    }
+
     *{
         -webkit-tap-highlight-color:transparent;
     }
@@ -2166,9 +2209,9 @@ footer{
 
     .navbar{
         height:60px;
-        background:rgba(2,8,23,.94);
+        background:var(--bg);
         backdrop-filter:blur(18px);
-        border-bottom:1px solid rgba(100,210,255,.10);
+        border-bottom:1px solid var(--line);
     }
 
     .nav-container{
