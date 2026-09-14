@@ -2152,7 +2152,10 @@ footer{
         color:var(--text);
     }
 
-    .navbar,
+    .navbar{
+        background:var(--bg);
+    }
+
     .hero,
     .introduction,
     .vision,
@@ -2162,7 +2165,11 @@ footer{
     .founder-section,
     .cta,
     footer{
-        background-color:var(--bg);
+        background:linear-gradient(
+            180deg,
+            var(--bg),
+            var(--bg2)
+        );
     }
 
     .vision-card,
@@ -2171,7 +2178,12 @@ footer{
     .tech-item,
     .founder-card,
     .cta-box{
-        border-color:var(--line);
+        background:linear-gradient(
+            145deg,
+            var(--blue1),
+            var(--blue2)
+        );
+        border-color:var(--line2);
     }
 
     .hero h1,
