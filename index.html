@@ -1,0 +1,3086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NEXAITORA Technologies</title>
+
+<meta name="description"
+content="NEXAITORA Technologies — Building intelligent systems for a connected world.">
+
+<style>
+
+/* =========================================================
+   NEXAITORA TECHNOLOGIES
+   VERSION 5 — ALL BLUE PREMIUM THEME
+   ========================================================= */
+
+:root{
+    --bg:#020817;
+    --bg2:#031329;
+    --blue1:#061d3a;
+    --blue2:#08294b;
+    --blue3:#0a345d;
+
+    --accent:#19a9ee;
+    --accent2:#54d2ff;
+    --accent3:#8be5ff;
+
+    --white:#f4fbff;
+    --text:#9ebbd2;
+    --muted:#6f8da7;
+
+    --line:rgba(100,210,255,.13);
+    --line2:rgba(100,210,255,.22);
+
+    --max:1200px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+    overflow-x:hidden;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+button{
+    font:inherit;
+}
+
+
+/* =========================================================
+   GLOBAL BACKGROUND
+   ========================================================= */
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at 75% 10%,
+            rgba(15,151,230,.17),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 10% 55%,
+            rgba(8,102,180,.13),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020817,
+            #041a34 50%,
+            #020817
+        );
+}
+
+.grid-background{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(
+            rgba(83,201,246,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(83,201,246,.035) 1px,
+            transparent 1px
+        );
+
+    background-size:65px 65px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 95%
+        );
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:76px;
+    z-index:1000;
+
+    background:rgba(2,10,24,.82);
+
+    border-bottom:1px solid var(--line);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+}
+
+.nav-container{
+    width:min(var(--max),92%);
+    height:100%;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+}
+
+.brand img{
+    width:178px;
+    height:54px;
+    object-fit:contain;
+    display:block;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:31px;
+}
+
+.nav-links a{
+    color:#9bb6cd;
+    font-size:12px;
+    font-weight:600;
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+.nav-product{
+    padding:10px 16px;
+
+    border:1px solid rgba(70,194,244,.30);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(18,153,225,.20),
+            rgba(18,91,155,.09)
+        );
+
+    border-radius:8px;
+
+    color:white !important;
+}
+
+.nav-product:hover{
+    border-color:#42c8f7;
+
+    background:
+        rgba(20,153,229,.27);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero{
+    min-height:820px;
+
+    position:relative;
+    overflow:hidden;
+
+    padding-top:76px;
+
+    background:
+        radial-gradient(
+            circle at 72% 45%,
+            rgba(17,155,230,.14),
+            transparent 32%
+        ),
+        linear-gradient(
+            135deg,
+            #020817 0%,
+            #041b36 55%,
+            #031022 100%
+        );
+}
+
+.hero-inner{
+    width:min(var(--max),92%);
+
+    min-height:744px;
+
+    margin:auto;
+
+    position:relative;
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:
+        1.05fr
+        .95fr;
+
+    align-items:center;
+
+    gap:50px;
+}
+
+.hero-copy{
+    padding-top:35px;
+}
+
+.hero-label{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+
+    padding:8px 13px;
+
+    border-radius:30px;
+
+    border:1px solid var(--line2);
+
+    background:
+        rgba(20,151,221,.08);
+
+    color:#68cef5;
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    margin-bottom:25px;
+}
+
+.live-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:#4ac9f8;
+
+    box-shadow:
+        0 0 0 5px rgba(72,197,247,.08),
+        0 0 15px rgba(72,197,247,.8);
+}
+
+.hero h1{
+    max-width:720px;
+
+    font-size:
+        clamp(
+            48px,
+            6.2vw,
+            79px
+        );
+
+    line-height:.97;
+
+    letter-spacing:-4px;
+
+    font-weight:750;
+
+    margin-bottom:29px;
+}
+
+.hero h1 .light{
+    color:#b3cde0;
+    font-weight:350;
+}
+
+.hero h1 .blue{
+    color:#43c2f7;
+
+    text-shadow:
+        0 0 35px rgba(54,185,240,.20);
+}
+
+.hero-description{
+    max-width:600px;
+
+    color:#8eabc3;
+
+    font-size:15px;
+
+    line-height:1.85;
+
+    margin-bottom:34px;
+}
+
+.hero-actions{
+    display:flex;
+    align-items:center;
+
+    gap:13px;
+
+    flex-wrap:wrap;
+}
+
+.btn{
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:9px;
+
+    padding:13px 19px;
+
+    border-radius:8px;
+
+    font-size:12px;
+    font-weight:750;
+
+    transition:
+        transform .25s,
+        background .25s,
+        border-color .25s,
+        box-shadow .25s;
+}
+
+.btn-primary{
+    background:
+        linear-gradient(
+            135deg,
+            #119fe9,
+            #0879c1
+        );
+
+    color:white;
+
+    box-shadow:
+        0 10px 35px rgba(20,153,229,.22);
+}
+
+.btn-primary:hover{
+    transform:translateY(-2px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2ab8f4,
+            #0b8bd0
+        );
+
+    box-shadow:
+        0 14px 38px rgba(20,153,229,.30);
+}
+
+.btn-secondary{
+    color:#b5ccde;
+
+    border:1px solid var(--line);
+
+    background:
+        rgba(255,255,255,.025);
+}
+
+.btn-secondary:hover{
+    transform:translateY(-2px);
+
+    color:white;
+
+    border-color:var(--line2);
+
+    background:
+        rgba(25,158,229,.08);
+}
+
+
+/* =========================================================
+   HERO SYSTEM VISUAL
+   ========================================================= */
+
+.hero-visual{
+    height:560px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+}
+
+.system-sphere{
+    width:430px;
+    height:430px;
+
+    position:relative;
+
+    border-radius:50%;
+
+    border:1px solid rgba(72,190,241,.18);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(19,133,198,.13),
+            rgba(5,17,34,.18) 50%,
+            transparent 72%
+        );
+
+    box-shadow:
+        0 0 100px rgba(17,142,214,.09),
+        inset 0 0 80px rgba(16,135,203,.08);
+}
+
+.system-sphere:before{
+    content:"";
+
+    position:absolute;
+
+    inset:45px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(72,190,241,.15);
+}
+
+.system-sphere:after{
+    content:"";
+
+    position:absolute;
+
+    inset:105px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(72,190,241,.19);
+}
+
+.center-logo{
+    position:absolute;
+
+    width:235px;
+    height:135px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    object-fit:contain;
+
+    z-index:5;
+
+    filter:
+        drop-shadow(
+            0 15px 30px rgba(0,0,0,.42)
+        );
+}
+
+.orbit{
+    position:absolute;
+
+    border:1px solid rgba(79,192,242,.14);
+
+    border-radius:50%;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%) rotate(-20deg);
+}
+
+.orbit-one{
+    width:360px;
+    height:170px;
+}
+
+.orbit-two{
+    width:170px;
+    height:360px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(32deg);
+}
+
+.system-node{
+    position:absolute;
+
+    width:11px;
+    height:11px;
+
+    border-radius:50%;
+
+    background:#45c7f8;
+
+    box-shadow:
+        0 0 0 8px rgba(69,193,245,.06),
+        0 0 20px rgba(69,193,245,.75);
+
+    z-index:7;
+}
+
+.node-a{
+    top:54px;
+    left:110px;
+}
+
+.node-b{
+    right:40px;
+    top:197px;
+}
+
+.node-c{
+    bottom:68px;
+    right:117px;
+}
+
+.node-d{
+    bottom:120px;
+    left:42px;
+}
+
+.system-label{
+    position:absolute;
+
+    padding:8px 11px;
+
+    border-radius:7px;
+
+    background:
+        rgba(3,17,35,.90);
+
+    border:1px solid rgba(99,196,239,.16);
+
+    color:#6e9ab7;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:1.5px;
+
+    z-index:10;
+}
+
+.label-top{
+    top:75px;
+    right:-15px;
+}
+
+.label-bottom{
+    bottom:73px;
+    left:-35px;
+}
+
+
+/* =========================================================
+   HERO FOOTER
+   ========================================================= */
+
+.hero-bottom{
+    position:absolute;
+
+    bottom:27px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:min(var(--max),92%);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:#587691;
+
+    font-size:9px;
+
+    letter-spacing:1.2px;
+
+    text-transform:uppercase;
+}
+
+.scroll-text{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.scroll-line{
+    width:38px;
+    height:1px;
+
+    background:#2c9bc8;
+}
+
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+
+.introduction{
+    padding:110px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #04172f,
+            #062241 52%,
+            #04152c
+        );
+
+    color:var(--white);
+
+    border-top:1px solid rgba(79,190,240,.06);
+
+    border-bottom:1px solid rgba(79,190,240,.06);
+}
+
+.container{
+    width:min(var(--max),92%);
+
+    margin:auto;
+}
+
+.intro-layout{
+    display:grid;
+
+    grid-template-columns:
+        .9fr
+        1.1fr;
+
+    gap:100px;
+
+    align-items:start;
+}
+
+.section-tag{
+    color:#35b9f1;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    margin-bottom:14px;
+}
+
+.intro-title{
+    font-size:43px;
+
+    line-height:1.08;
+
+    letter-spacing:-1.7px;
+
+    color:#f3fbff;
+}
+
+.intro-title span{
+    color:#32b8f1;
+}
+
+.intro-copy{
+    padding-top:5px;
+}
+
+.intro-copy p{
+    color:#94b1c9;
+
+    font-size:14px;
+
+    line-height:1.95;
+
+    margin-bottom:19px;
+}
+
+.intro-line{
+    width:65px;
+    height:2px;
+
+    background:#159bea;
+
+    margin-top:28px;
+
+    box-shadow:
+        0 0 15px rgba(21,155,234,.45);
+}
+
+
+/* =========================================================
+   VISION
+   ========================================================= */
+
+.vision{
+    padding:105px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #031126,
+            #041a34
+        );
+
+    color:var(--white);
+}
+
+.section-heading{
+    max-width:700px;
+
+    margin-bottom:47px;
+}
+
+.section-heading h2{
+    font-size:42px;
+
+    line-height:1.08;
+
+    letter-spacing:-1.6px;
+
+    margin-bottom:15px;
+}
+
+.section-heading p{
+    color:#86a4bd;
+
+    font-size:14px;
+
+    line-height:1.8;
+}
+
+.vision-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:16px;
+}
+
+.vision-card{
+    position:relative;
+
+    min-height:270px;
+
+    padding:29px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(88,194,239,.13);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(10,45,76,.82),
+            rgba(5,26,49,.92)
+        );
+
+    overflow:hidden;
+
+    transition:.3s;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+.vision-card:hover{
+    transform:translateY(-6px);
+
+    border-color:
+        rgba(77,198,244,.32);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(11,57,94,.90),
+            rgba(5,29,54,.96)
+        );
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.22),
+        0 0 30px rgba(19,142,210,.06);
+}
+
+.vision-card:after{
+    content:"";
+
+    position:absolute;
+
+    width:140px;
+    height:140px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(21,155,234,.10);
+
+    right:-65px;
+    bottom:-65px;
+}
+
+.vision-number{
+    color:#3bbcf1;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+    margin-bottom:55px;
+}
+
+.vision-icon{
+    width:43px;
+    height:43px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        rgba(17,156,229,.12);
+
+    border:1px solid rgba(62,191,241,.13);
+
+    color:#49c6f6;
+
+    font-size:18px;
+
+    margin-bottom:18px;
+}
+
+.vision-card h3{
+    font-size:18px;
+
+    margin-bottom:9px;
+}
+
+.vision-card p{
+    color:#7998b1;
+
+    font-size:11px;
+
+    line-height:1.8;
+}
+
+
+/* =========================================================
+   FEATURED PRODUCT
+   ========================================================= */
+
+.product{
+    padding:110px 0;
+
+    background:
+        radial-gradient(
+            circle at 80% 40%,
+            rgba(17,145,216,.10),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #020d20,
+            #06203e,
+            #031329
+        );
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.product:before{
+    content:"";
+
+    position:absolute;
+
+    width:600px;
+    height:600px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(76,193,241,.07);
+
+    right:-250px;
+    top:-230px;
+}
+
+.product-header{
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    margin-bottom:45px;
+}
+
+.product-header h2{
+    max-width:650px;
+
+    font-size:43px;
+
+    line-height:1.08;
+
+    letter-spacing:-1.7px;
+}
+
+.product-header p{
+    max-width:410px;
+
+    color:#829fb8;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+.product-card{
+    display:grid;
+
+    grid-template-columns:
+        1.05fr
+        .95fr;
+
+    min-height:410px;
+
+    border:1px solid rgba(95,200,242,.13);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(8,44,75,.72),
+            rgba(4,22,43,.86)
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.20);
+}
+
+.product-info{
+    padding:50px;
+}
+
+.product-label{
+    color:#48bff2;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    margin-bottom:19px;
+}
+
+.product-info h3{
+    font-size:34px;
+
+    line-height:1.1;
+
+    letter-spacing:-1px;
+
+    margin-bottom:18px;
+}
+
+.product-info p{
+    max-width:580px;
+
+    color:#91abc2;
+
+    font-size:13px;
+
+    line-height:1.9;
+
+    margin-bottom:27px;
+}
+
+.product-points{
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:28px;
+}
+
+.product-points span{
+    padding:7px 10px;
+
+    border-radius:5px;
+
+    border:1px solid rgba(83,194,241,.14);
+
+    background:
+        rgba(35,154,215,.07);
+
+    color:#7e9bb4;
+
+    font-size:9px;
+
+    font-weight:700;
+}
+
+.product-visual{
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(20,155,231,.19),
+            transparent 38%
+        ),
+        #04182e;
+}
+
+.product-grid{
+    position:absolute;
+
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            rgba(91,195,238,.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(91,195,238,.055) 1px,
+            transparent 1px
+        );
+
+    background-size:38px 38px;
+}
+
+.network{
+    width:280px;
+    height:280px;
+
+    position:relative;
+
+    z-index:3;
+}
+
+.network-center{
+    position:absolute;
+
+    width:65px;
+    height:65px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #0d4268,
+            #082945
+        );
+
+    border:1px solid rgba(86,201,247,.40);
+
+    box-shadow:
+        0 0 35px rgba(31,164,225,.24);
+}
+
+.network-center:before{
+    content:"N";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    color:#62cef8;
+
+    font-size:23px;
+
+    font-weight:800;
+}
+
+.network-line{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    height:1px;
+
+    width:105px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(64,193,242,.7),
+            rgba(64,193,242,.05)
+        );
+
+    transform-origin:left center;
+}
+
+.nl1{
+    transform:rotate(-35deg);
+}
+
+.nl2{
+    transform:rotate(32deg);
+}
+
+.nl3{
+    transform:rotate(145deg);
+}
+
+.nl4{
+    transform:rotate(210deg);
+}
+
+.network-node{
+    position:absolute;
+
+    width:13px;
+    height:13px;
+
+    border-radius:50%;
+
+    background:#43bff4;
+
+    box-shadow:
+        0 0 18px rgba(67,191,244,.8);
+}
+
+.nn1{
+    top:67px;
+    right:39px;
+}
+
+.nn2{
+    top:183px;
+    right:45px;
+}
+
+.nn3{
+    bottom:36px;
+    left:56px;
+}
+
+.nn4{
+    top:59px;
+    left:42px;
+}
+
+
+/* =========================================================
+   APPROACH
+   ========================================================= */
+
+.approach{
+    padding:110px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #04172f,
+            #052344
+        );
+
+    color:var(--white);
+}
+
+.approach-grid{
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap:80px;
+
+    align-items:center;
+}
+
+.approach-title{
+    font-size:43px;
+
+    line-height:1.08;
+
+    letter-spacing:-1.6px;
+
+    margin-bottom:18px;
+}
+
+.approach-description{
+    max-width:500px;
+
+    color:#8daac2;
+
+    font-size:14px;
+
+    line-height:1.9;
+}
+
+.steps{
+    display:grid;
+
+    gap:1px;
+
+    background:
+        rgba(87,191,237,.14);
+
+    border:1px solid rgba(87,191,237,.14);
+
+    border-radius:12px;
+
+    overflow:hidden;
+}
+
+.step{
+    display:grid;
+
+    grid-template-columns:60px 1fr;
+
+    gap:18px;
+
+    padding:24px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7,40,69,.94),
+            rgba(5,29,54,.94)
+        );
+}
+
+.step:hover{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(8,51,84,.98),
+            rgba(5,34,61,.98)
+        );
+}
+
+.step-number{
+    color:#1598df;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+.step h3{
+    font-size:16px;
+
+    margin-bottom:6px;
+}
+
+.step p{
+    color:#7695ae;
+
+    font-size:11px;
+
+    line-height:1.75;
+}
+
+
+/* =========================================================
+   TECHNOLOGY
+   ========================================================= */
+
+.technology{
+    padding:100px 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(13,112,180,.10),
+            transparent 35%
+        ),
+        linear-gradient(
+            180deg,
+            #020d20,
+            #04182f
+        );
+
+    color:var(--white);
+}
+
+.tech-head{
+    text-align:center;
+
+    max-width:720px;
+
+    margin:0 auto 48px;
+}
+
+.tech-head h2{
+    font-size:42px;
+
+    line-height:1.1;
+
+    letter-spacing:-1.6px;
+
+    margin-bottom:14px;
+}
+
+.tech-head p{
+    color:#829fb7;
+
+    font-size:13px;
+
+    line-height:1.8;
+}
+
+.tech-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+    gap:10px;
+}
+
+.tech-item{
+    min-height:115px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    border:1px solid rgba(81,190,237,.12);
+
+    border-radius:11px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(7,42,72,.82),
+            rgba(4,25,48,.88)
+        );
+
+    color:#87a7c0;
+
+    font-size:10px;
+
+    font-weight:750;
+
+    padding:15px;
+
+    transition:.25s;
+}
+
+.tech-item:hover{
+    color:#55caf7;
+
+    border-color:
+        rgba(77,198,244,.30);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(9,55,91,.94),
+            rgba(5,30,56,.96)
+        );
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.20),
+        0 0 25px rgba(19,142,210,.06);
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.cta{
+    padding:110px 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            #031329,
+            #062342,
+            #031329
+        );
+}
+
+.cta-box{
+    min-height:350px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    border-radius:23px;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(29,156,224,.22),
+            transparent 33%
+        ),
+        linear-gradient(
+            135deg,
+            #061b38,
+            #082b50
+        );
+
+    border:1px solid rgba(70,181,232,.16);
+
+    box-shadow:
+        0 30px 70px rgba(0,0,0,.22);
+}
+
+.cta-box:before{
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    border:1px solid rgba(87,200,243,.08);
+
+    top:-350px;
+    left:50%;
+
+    transform:translateX(-50%);
+}
+
+.cta-box h2{
+    position:relative;
+
+    font-size:46px;
+
+    line-height:1.08;
+
+    letter-spacing:-1.8px;
+
+    margin-bottom:15px;
+}
+
+.cta-box p{
+    position:relative;
+
+    max-width:590px;
+
+    color:#96b1c7;
+
+    font-size:13px;
+
+    line-height:1.8;
+
+    margin-bottom:28px;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+footer{
+    background:
+        #010813;
+
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.footer-main{
+    width:min(var(--max),92%);
+
+    margin:auto;
+
+    padding:52px 0 38px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:50px;
+}
+
+.footer-logo{
+    width:175px;
+    height:52px;
+
+    object-fit:contain;
+
+    margin-bottom:13px;
+}
+
+.footer-description{
+    max-width:350px;
+
+    color:#607c95;
+
+    font-size:10px;
+
+    line-height:1.8;
+}
+
+.footer-links{
+    display:flex;
+
+    gap:28px;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+}
+
+.footer-links a{
+    color:#708ca5;
+
+    font-size:10px;
+
+    transition:.2s;
+}
+
+.footer-links a:hover{
+    color:#4bc5f5;
+}
+
+.footer-bottom{
+    width:min(var(--max),92%);
+
+    margin:auto;
+
+    padding:19px 0;
+
+    border-top:1px solid rgba(255,255,255,.06);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#506b84;
+
+    font-size:8px;
+
+    letter-spacing:.5px;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes floating{
+
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            translateY(0);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-50%)
+            translateY(-8px);
+    }
+}
+
+@keyframes orbitRotate{
+
+    from{
+        transform:
+            translate(-50%,-50%)
+            rotate(-20deg);
+    }
+
+    to{
+        transform:
+            translate(-50%,-50%)
+            rotate(340deg);
+    }
+}
+
+@keyframes glowPulse{
+
+    0%,100%{
+        opacity:.65;
+    }
+
+    50%{
+        opacity:1;
+    }
+}
+
+.center-logo{
+    animation:
+        floating 5s ease-in-out infinite;
+}
+
+.orbit-one{
+    animation:
+        orbitRotate 22s linear infinite;
+}
+
+.system-node{
+    animation:
+        glowPulse 2.7s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:1000px){
+
+    .hero-inner{
+        grid-template-columns:1fr;
+
+        padding-top:80px;
+        padding-bottom:70px;
+    }
+
+    .hero{
+        min-height:1100px;
+    }
+
+    .hero-inner{
+        min-height:1024px;
+    }
+
+    .hero-visual{
+        height:400px;
+    }
+
+    .system-sphere{
+        width:350px;
+        height:350px;
+    }
+
+    .intro-layout{
+        grid-template-columns:1fr;
+        gap:35px;
+    }
+
+    .product-card{
+        grid-template-columns:1fr;
+    }
+
+    .product-visual{
+        min-height:390px;
+    }
+
+    .approach-grid{
+        grid-template-columns:1fr;
+        gap:45px;
+    }
+
+    .tech-grid{
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+}
+
+
+@media(max-width:700px){
+
+    .navbar{
+        height:68px;
+    }
+
+    .brand img{
+        width:145px;
+        height:48px;
+    }
+
+    .nav-links{
+        gap:8px;
+    }
+
+    .nav-links a:not(.nav-product){
+        display:none;
+    }
+
+    .nav-product{
+        padding:9px 12px;
+
+        font-size:10px !important;
+    }
+
+    .hero{
+        min-height:950px;
+
+        padding-top:68px;
+    }
+
+    .hero-inner{
+        min-height:882px;
+
+        padding-top:65px;
+        padding-bottom:45px;
+    }
+
+    .hero h1{
+        font-size:45px;
+
+        letter-spacing:-2.5px;
+    }
+
+    .hero-description{
+        font-size:13px;
+    }
+
+    .hero-visual{
+        height:315px;
+    }
+
+    .system-sphere{
+        width:285px;
+        height:285px;
+    }
+
+    .system-sphere:before{
+        inset:31px;
+    }
+
+    .system-sphere:after{
+        inset:72px;
+    }
+
+    .center-logo{
+        width:175px;
+        height:105px;
+    }
+
+    .orbit-one{
+        width:245px;
+        height:120px;
+    }
+
+    .orbit-two{
+        width:120px;
+        height:245px;
+    }
+
+    .system-label{
+        display:none;
+    }
+
+    .hero-bottom{
+        display:none;
+    }
+
+    .introduction,
+    .vision,
+    .product,
+    .approach,
+    .technology,
+    .cta{
+        padding:75px 0;
+    }
+
+    .intro-title,
+    .section-heading h2,
+    .product-header h2,
+    .approach-title,
+    .tech-head h2{
+        font-size:33px;
+    }
+
+    .vision-grid{
+        grid-template-columns:1fr;
+    }
+
+    .product-header{
+        display:block;
+    }
+
+    .product-header p{
+        margin-top:18px;
+    }
+
+    .product-info{
+        padding:30px;
+    }
+
+    .product-info h3{
+        font-size:28px;
+    }
+
+    .product-visual{
+        min-height:320px;
+    }
+
+    .network{
+        transform:scale(.8);
+    }
+
+    .tech-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .cta-box{
+        min-height:320px;
+        padding:35px 22px;
+    }
+
+    .cta-box h2{
+        font-size:34px;
+    }
+
+    .footer-main{
+        flex-direction:column;
+
+        padding:40px 0 30px;
+    }
+
+    .footer-links{
+        gap:18px;
+    }
+
+    .footer-bottom{
+        flex-direction:column;
+
+        gap:8px;
+    }
+}
+
+
+@media(max-width:420px){
+
+    .hero h1{
+        font-size:39px;
+    }
+
+    .hero-actions{
+        flex-direction:column;
+
+        align-items:stretch;
+    }
+
+    .btn{
+        width:100%;
+    }
+
+    .tech-grid{
+        grid-template-columns:
+            1fr 1fr;
+    }
+}
+
+
+
+/* ================= FOUNDER CONTACT ================= */
+
+.founder-section{
+    padding:95px 0;
+    position:relative;
+    border-top:1px solid rgba(255,255,255,.05);
+    background:
+        radial-gradient(
+            circle at 15% 50%,
+            rgba(60,130,255,.08),
+            transparent 45%
+        );
+}
+
+.founder-title{
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.founder-title span{
+    display:block;
+    color:#5e9cff;
+    font-size:11px;
+    letter-spacing:3px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.founder-title h2{
+    margin:0;
+    font-size:clamp(30px,4vw,48px);
+    letter-spacing:-1.5px;
+}
+
+.founder-card{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    align-items:center;
+    gap:45px;
+    max-width:900px;
+    margin:auto;
+    padding:38px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    background:rgba(255,255,255,.025);
+    box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.founder-photo{
+    width:190px;
+    height:220px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(
+        145deg,
+        rgba(60,130,255,.12),
+        rgba(255,255,255,.025)
+    );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#718096;
+    font-size:12px;
+    letter-spacing:1.5px;
+    text-align:center;
+    overflow:hidden;
+    cursor:pointer;
+    position:relative;
+    transition:.25s ease;
+}
+
+.founder-photo:hover{
+    border-color:rgba(94,156,255,.65);
+    transform:translateY(-3px);
+}
+
+.founder-photo::after{
+    content:"CLICK TO CHANGE PHOTO";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:12px;
+    font-size:8px;
+    letter-spacing:1px;
+    color:#718096;
+}
+
+.founder-photo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:none;
+}
+
+.founder-photo.has-photo::after{
+    opacity:0;
+}
+
+.founder-photo.has-photo #founderPhotoText{
+    display:none;
+}
+
+.founder-label{
+    font-size:11px;
+    letter-spacing:2px;
+    color:#5e9cff;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.founder-name{
+    font-size:clamp(25px,3vw,38px);
+    line-height:1.15;
+    letter-spacing:-1px;
+    margin:0;
+}
+
+.founder-role{
+    margin-top:8px;
+    color:#a9b7c6;
+    font-size:15px;
+}
+
+.founder-company{
+    margin-top:3px;
+    color:#667789;
+    font-size:13px;
+}
+
+.founder-contact{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:24px;
+}
+
+.contact-item{
+    padding:10px 14px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:10px;
+    color:#9eacba;
+    font-size:12px;
+    background:rgba(255,255,255,.02);
+}
+
+.contact-item a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.contact-item:hover{
+    border-color:rgba(94,156,255,.35);
+}
+
+@media(max-width:900px){
+    .founder-card{
+        grid-template-columns:1fr;
+        text-align:center;
+        justify-items:center;
+        padding:28px 22px;
+    }
+
+    .founder-contact{
+        justify-content:center;
+    }
+}
+
+@media(max-width:600px){
+    .founder-section{
+        padding:75px 0;
+    }
+
+    .founder-photo{
+        width:165px;
+        height:195px;
+    }
+
+    .founder-name{
+        font-size:25px;
+    }
+
+    .contact-item{
+        width:100%;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVIGATION
+     ===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a
+            href="company.html"
+            class="brand"
+        >
+
+            <img
+                src="nexaitora-logo.png"
+                alt="NEXAITORA Technologies"
+            >
+
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#vision">
+                Vision
+            </a>
+
+            <a href="#solution">
+                Solution
+            </a>
+
+            <a href="#technology">
+                Technology
+            </a>
+
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     HERO
+     ===================================================== -->
+
+<section class="hero">
+
+    <div class="grid-background"></div>
+
+
+    <div class="hero-inner">
+
+
+        <div class="hero-copy">
+
+            <div class="hero-label">
+
+                <span class="live-dot"></span>
+
+                Intelligent technology systems
+
+            </div>
+
+
+            <h1>
+
+                <span class="light">
+                    Engineering
+                </span>
+
+                <br>
+
+                what comes
+
+                <span class="blue">
+                    next.
+                </span>
+
+            </h1>
+
+
+            <p class="hero-description">
+
+                NEXAITORA Technologies builds practical
+                intelligent systems designed to solve
+                real-world digital challenges and adapt
+                to changing demands.
+
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a
+                    href="#about"
+                    class="btn btn-secondary"
+                >
+                    Discover NEXAITORA
+                </a>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SYSTEM VISUAL -->
+
+        <div class="hero-visual">
+
+            <div class="system-sphere">
+
+
+                <div class="orbit orbit-one"></div>
+
+                <div class="orbit orbit-two"></div>
+
+
+                <img
+                    src="nexaitora-logo.png"
+                    class="center-logo"
+                    alt="NEXAITORA Technologies"
+                >
+
+
+                <div class="system-node node-a"></div>
+
+                <div class="system-node node-b"></div>
+
+                <div class="system-node node-c"></div>
+
+                <div class="system-node node-d"></div>
+
+
+                <div class="system-label label-top">
+                    INTELLIGENT SYSTEMS
+                </div>
+
+
+                <div class="system-label label-bottom">
+                    BUILT FOR DEMAND
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="hero-bottom">
+
+        <div class="scroll-text">
+
+            <span class="scroll-line"></span>
+
+            SCROLL TO EXPLORE
+
+        </div>
+
+
+        <span>
+            NEXAITORA / 2026
+        </span>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ABOUT
+     ===================================================== -->
+
+<section
+    class="introduction"
+    id="about"
+>
+
+    <div class="container">
+
+        <div class="intro-layout">
+
+
+            <div>
+
+                <div class="section-tag">
+                    Who we are
+                </div>
+
+                <h2 class="intro-title">
+
+                    Technology should
+                    <span>
+                        solve.
+                    </span>
+
+                </h2>
+
+            </div>
+
+
+            <div class="intro-copy">
+
+                <p>
+
+                    NEXAITORA Technologies is focused on
+                    creating practical software systems that
+                    combine engineering, intelligent computing
+                    and automation.
+
+                </p>
+
+
+                <p>
+
+                    We look at problems from the system level:
+                    how information moves, how users interact,
+                    how workloads change and how technology
+                    can respond.
+
+                </p>
+
+
+                <p>
+
+                    The result is technology built around a
+                    clear purpose rather than unnecessary
+                    complexity.
+
+                </p>
+
+
+                <div class="intro-line"></div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VISION
+     ===================================================== -->
+
+<section
+    class="vision"
+    id="vision"
+>
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div class="section-tag">
+                What drives us
+            </div>
+
+            <h2>
+                Ideas become valuable
+                when they work.
+            </h2>
+
+            <p>
+
+                We focus on technology that can move from
+                concept to implementation and create a
+                meaningful improvement to the system.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="vision-grid">
+
+
+            <article class="vision-card">
+
+                <div class="vision-number">
+                    01 / THINK
+                </div>
+
+                <div class="vision-icon">
+                    ◇
+                </div>
+
+                <h3>
+                    Understand the problem
+                </h3>
+
+                <p>
+
+                    Every useful system begins with
+                    understanding what actually needs
+                    to change.
+
+                </p>
+
+            </article>
+
+
+
+            <article class="vision-card">
+
+                <div class="vision-number">
+                    02 / BUILD
+                </div>
+
+                <div class="vision-icon">
+                    +
+                </div>
+
+                <h3>
+                    Engineer the solution
+                </h3>
+
+                <p>
+
+                    We combine the right technologies
+                    to create a solution that is practical
+                    and usable.
+
+                </p>
+
+            </article>
+
+
+
+            <article class="vision-card">
+
+                <div class="vision-number">
+                    03 / EVOLVE
+                </div>
+
+                <div class="vision-icon">
+                    ↗
+                </div>
+
+                <h3>
+                    Improve continuously
+                </h3>
+
+                <p>
+
+                    Systems become stronger through testing,
+                    measurement and continuous improvement.
+
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEATURED PRODUCT
+     ===================================================== -->
+
+<!-- =====================================================
+     APPROACH
+     ===================================================== -->
+
+<section class="approach">
+
+    <div class="container">
+
+        <div class="approach-grid">
+
+
+            <div>
+
+                <div class="section-tag">
+                    Our approach
+                </div>
+
+                <h2 class="approach-title">
+
+                    Simple thinking.
+                    Serious engineering.
+
+                </h2>
+
+
+                <p class="approach-description">
+
+                    We avoid adding technology simply because
+                    it is available. Every component should
+                    have a reason to exist and contribute
+                    to the final system.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="steps">
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Observe
+                        </h3>
+
+                        <p>
+
+                            Understand users, data,
+                            workloads and system behavior.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Design
+                        </h3>
+
+                        <p>
+
+                            Create an architecture around
+                            the actual requirements.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Build
+                        </h3>
+
+                        <p>
+
+                            Turn the architecture into
+                            a working system.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Evolve
+                        </h3>
+
+                        <p>
+
+                            Test performance, learn from
+                            results and improve the system.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TECHNOLOGY
+     ===================================================== -->
+
+<section
+    class="technology"
+    id="technology"
+>
+
+    <div class="container">
+
+
+        <div class="tech-head">
+
+            <div class="section-tag">
+                Technology
+            </div>
+
+            <h2>
+                Where intelligence
+                meets engineering.
+            </h2>
+
+            <p>
+
+                Our work combines software engineering,
+                AI/ML concepts, data systems and automation
+                to create useful technology.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="tech-grid">
+
+            <div class="tech-item">
+                Software<br>Engineering
+            </div>
+
+            <div class="tech-item">
+                Artificial<br>Intelligence
+            </div>
+
+            <div class="tech-item">
+                Machine<br>Learning
+            </div>
+
+            <div class="tech-item">
+                Data<br>Systems
+            </div>
+
+            <div class="tech-item">
+                Automation
+            </div>
+
+            <div class="tech-item">
+                Scalable<br>Architecture
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CTA
+     ===================================================== -->
+
+<!-- =====================================================
+     FOOTER
+     ===================================================== -->
+
+<section
+    class="product"
+    id="solution"
+>
+
+    <div class="container">
+
+
+        <div class="product-header">
+
+            <div>
+
+
+                <h2>
+                    Solving a problem
+                    people actually face.
+                </h2>
+
+            </div>
+
+
+            <p>
+
+                Our current flagship project explores
+                intelligent traffic management for
+                high-demand digital result services.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="product-card">
+
+
+            <div class="product-info">
+
+                <div class="product-label">
+                    NEXAITORA / PRODUCT 01
+                </div>
+
+
+                <h3>
+                    Smart Result
+                    Traffic Manager
+                </h3>
+
+
+                <p>
+
+                    A practical system that organizes
+                    incoming requests, manages workloads
+                    and helps digital result services
+                    remain responsive during periods of
+                    heavy demand.
+
+                </p>
+
+
+                <div class="product-points">
+
+                    <span>
+                        Traffic Management
+                    </span>
+
+                    <span>
+                        Intelligent Monitoring
+                    </span>
+
+                    <span>
+                        Predictive Insights
+                    </span>
+
+                    <span>
+                        Scalable Processing
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="product.html"
+                    class="btn btn-primary"
+                >
+
+                    Explore project
+
+                    <span>→</span>
+
+                </a>
+
+            </div>
+
+
+
+            <div class="product-visual">
+
+                <div class="product-grid"></div>
+
+
+                <div class="network">
+
+
+                    <div class="network-line nl1"></div>
+
+                    <div class="network-line nl2"></div>
+
+                    <div class="network-line nl3"></div>
+
+                    <div class="network-line nl4"></div>
+
+
+                    <div class="network-center"></div>
+
+
+                    <div class="network-node nn1"></div>
+
+                    <div class="network-node nn2"></div>
+
+                    <div class="network-node nn3"></div>
+
+                    <div class="network-node nn4"></div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+
+
+<!-- ================= FOUNDER & CONTACT ================= -->
+
+<section class="founder-section">
+
+<div class="container">
+
+<div class="founder-title">
+<span>ABOUT NEXAITORA</span>
+<h2>Meet the Founder</h2>
+</div>
+
+<div class="founder-card">
+
+<label class="founder-photo" for="founderPhotoInput">
+
+<img id="founderPhotoPreview" alt="Founder photo">
+
+<span id="founderPhotoText">
+ADD PHOTO
+</span>
+
+</label>
+
+<input
+    type="file"
+    id="founderPhotoInput"
+    accept="image/*"
+    hidden
+>
+
+<div>
+
+<div class="founder-label">
+NEXAITORA TECHNOLOGIES
+</div>
+
+<h3 class="founder-name">
+Madasu Naga Venkata Lakshmi Narasimha
+</h3>
+
+<div class="founder-role">
+Founder &amp; CEO
+</div>
+
+<div class="founder-ai">
+    <p>
+        I turn my ideas into complete working projects and build
+        technology using AI. My role is to think, create ideas,
+        define the vision, and guide AI to turn those ideas into
+        real products.
+    </p>
+</div>
+
+<div class="founder-company">
+NEXAITORA Technologies
+</div>
+
+<div class="founder-contact">
+
+<div class="contact-item">
+<a href="mailto:narasimhamadasu794@gmail.com">
+✉ narasimhamadasu794@gmail.com
+</a>
+</div>
+
+<div class="contact-item">
+<a href="tel:9441371669">
+☎ 9441371669
+</a>
+</div>
+
+<div class="contact-item">
+📍 Sakhinetipalli, Andhra Pradesh
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+    <div class="footer-main">
+
+
+        <div>
+
+            <img
+                src="nexaitora-logo.png"
+                class="footer-logo"
+                alt="NEXAITORA Technologies"
+            >
+
+
+            <p class="footer-description">
+
+                Building practical intelligent systems
+                for real-world digital challenges.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="footer-links">
+
+            <a href="company.html">
+                Home
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#vision">
+                Vision
+            </a>
+
+            <a href="product.html">
+                Product
+            </a>
+
+            <a href="admin.html">
+                Dashboard
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 NEXAITORA Technologies
+        </span>
+
+        <span>
+            Intelligent systems · Practical innovation
+        </span>
+
+    </div>
+
+</footer>
+
+
+
+
+
+
+
+<script>
+const founderPhotoInput =
+    document.getElementById("founderPhotoInput");
+
+const founderPhotoPreview =
+    document.getElementById("founderPhotoPreview");
+
+const founderPhotoBox =
+    document.querySelector(".founder-photo");
+
+if (founderPhotoInput) {
+
+    founderPhotoInput.addEventListener("change", function () {
+
+        const file = this.files[0];
+
+        if (!file) return;
+
+        if (!file.type.startsWith("image/")) {
+            alert("Please select an image file.");
+            return;
+        }
+
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+
+            founderPhotoPreview.src = e.target.result;
+            founderPhotoPreview.style.display = "block";
+            founderPhotoBox.classList.add("has-photo");
+
+        };
+
+        reader.readAsDataURL(file);
+
+    });
+
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Result Traffic Manager | NEXAITORA</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:#04070b;
+    color:#edf5ff;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+.container{
+    width:min(1150px,92%);
+    margin:auto;
+}
+
+/* ================= NAV ================= */
+
+nav{
+    height:72px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+    background:rgba(4,7,11,.78);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.07);
+}
+
+.nav-inner{
+    height:100%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+
+.logo-mark{
+    width:37px;
+    height:37px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background:linear-gradient(135deg,#6bd0ff,#6871ff);
+    color:#06101a;
+    font-weight:900;
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+    color:#91a0b1;
+    font-size:14px;
+}
+
+.nav-links a{
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+    padding-top:145px;
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    width:850px;
+    height:500px;
+    left:50%;
+    top:18%;
+    transform:translateX(-50%);
+    background:radial-gradient(
+        circle,
+        rgba(52,145,255,.12),
+        transparent 68%
+    );
+    pointer-events:none;
+}
+
+.label{
+    color:#69c5ff;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    max-width:900px;
+    margin:20px auto;
+    font-size:clamp(44px,6vw,76px);
+    line-height:1.04;
+    letter-spacing:-3px;
+}
+
+.gradient{
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #70caff,
+        #9b9dff
+    );
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:720px;
+    margin:auto;
+    color:#8999aa;
+    font-size:18px;
+}
+
+.buttons{
+    margin-top:32px;
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:13px 22px;
+    border-radius:10px;
+    font-size:14px;
+    font-weight:700;
+    transition:.25s;
+}
+
+.primary{
+    background:#edf7ff;
+    color:#071019;
+}
+
+.primary:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 40px rgba(90,190,255,.18);
+}
+
+.secondary{
+    border:1px solid rgba(255,255,255,.13);
+    background:rgba(255,255,255,.03);
+    color:#d4dfeb;
+}
+
+.secondary:hover{
+    background:rgba(255,255,255,.07);
+}
+
+/* ================= PROFESSIONAL TRAFFIC INTELLIGENCE ANIMATION ================= */
+
+.traffic-visual{
+    position:relative;
+    width:min(1080px,100%);
+    height:390px;
+    margin:65px auto 0;
+    isolation:isolate;
+}
+
+.traffic-visual::before{
+    content:"";
+    position:absolute;
+    inset:35px 2%;
+    border:1px solid rgba(100,205,255,.06);
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 20% 50%,rgba(75,195,255,.07),transparent 25%),
+        radial-gradient(circle at 50% 50%,rgba(75,195,255,.08),transparent 25%),
+        radial-gradient(circle at 80% 50%,rgba(75,195,255,.06),transparent 25%);
+    box-shadow:
+        inset 0 0 70px rgba(40,150,220,.025),
+        0 0 60px rgba(40,160,230,.025);
+    z-index:-2;
+}
+
+.traffic-visual::after{
+    content:"";
+    position:absolute;
+    left:5%;
+    right:5%;
+    top:50%;
+    height:90px;
+    transform:translateY(-50%);
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(70,190,255,.035),
+        rgba(70,190,255,.09),
+        rgba(70,190,255,.035),
+        transparent
+    );
+    filter:blur(18px);
+    z-index:-1;
+}
+
+.flow-line{
+    position:absolute;
+    left:4%;
+    right:4%;
+    top:50%;
+    height:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(80,190,255,.12),
+        rgba(80,210,255,.65),
+        rgba(80,190,255,.12),
+        transparent
+    );
+    box-shadow:0 0 14px rgba(70,190,255,.18);
+}
+
+.flow-line::before,
+.flow-line::after{
+    content:"";
+    position:absolute;
+    top:50%;
+    width:90px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #73d5ff,
+        transparent
+    );
+    transform:translateY(-50%);
+    animation:energySweep 3s linear infinite;
+}
+
+.flow-line::before{
+    left:15%;
+}
+
+.flow-line::after{
+    left:55%;
+    animation-delay:1.5s;
+}
+
+@keyframes energySweep{
+    0%{
+        transform:translate(-80px,-50%);
+        opacity:0;
+    }
+    25%{
+        opacity:1;
+    }
+    70%{
+        opacity:.8;
+    }
+    100%{
+        transform:translate(240px,-50%);
+        opacity:0;
+    }
+}
+
+.traffic-particle{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#8be0ff;
+    box-shadow:
+        0 0 8px #73d5ff,
+        0 0 18px #73d5ff,
+        0 0 35px rgba(73,190,255,.7);
+    top:calc(50% - 2px);
+    z-index:30;
+}
+
+.traffic-particle::after{
+    content:"";
+    position:absolute;
+    width:34px;
+    height:1px;
+    right:2px;
+    top:2px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(115,213,255,.75)
+    );
+    transform-origin:right center;
+}
+
+.tp1{
+    animation:trafficMove 4s linear infinite;
+}
+
+.tp2{
+    animation:trafficMove 4s linear infinite 1s;
+}
+
+.tp3{
+    animation:trafficMove 4s linear infinite 2s;
+}
+
+.tp4{
+    animation:trafficMove 4s linear infinite 3s;
+}
+
+@keyframes trafficMove{
+    0%{
+        left:3%;
+        opacity:0;
+        transform:scale(.5);
+    }
+    8%{
+        opacity:1;
+        transform:scale(1);
+    }
+    42%{
+        opacity:1;
+    }
+    48%{
+        opacity:.15;
+        transform:scale(.7);
+    }
+    54%{
+        opacity:1;
+        transform:scale(1.15);
+    }
+    92%{
+        opacity:1;
+    }
+    100%{
+        left:97%;
+        opacity:0;
+        transform:scale(.6);
+    }
+}
+
+/* ================= SYSTEM NODES ================= */
+
+.system-node{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:20;
+    text-align:center;
+}
+
+.node-circle{
+    width:74px;
+    height:74px;
+    margin:auto;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #173b56,
+            #071019 68%,
+            #03070b
+        );
+    border:1px solid rgba(102,203,255,.55);
+    box-shadow:
+        0 0 18px rgba(68,181,255,.15),
+        0 0 38px rgba(68,181,255,.08),
+        inset 0 0 25px rgba(70,180,255,.08);
+    position:relative;
+    transition:.35s ease;
+}
+
+.node-circle::before{
+    content:"";
+    position:absolute;
+    inset:-5px;
+    border-radius:50%;
+    border:1px solid rgba(115,213,255,.1);
+    border-top-color:rgba(115,213,255,.65);
+    animation:orbitRing 4s linear infinite;
+}
+
+.node-circle::after{
+    content:"";
+    position:absolute;
+    inset:-11px;
+    border:1px solid rgba(80,180,255,.08);
+    border-radius:50%;
+    animation:nodePulse 3s ease-in-out infinite;
+}
+
+.system-node:hover .node-circle{
+    transform:scale(1.08);
+    box-shadow:
+        0 0 25px rgba(68,181,255,.3),
+        0 0 55px rgba(68,181,255,.12),
+        inset 0 0 28px rgba(70,180,255,.12);
+}
+
+@keyframes orbitRing{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes nodePulse{
+    0%,100%{
+        transform:scale(.94);
+        opacity:.3;
+    }
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.node-circle span{
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#e8f8ff;
+    text-shadow:0 0 12px rgba(120,215,255,.35);
+}
+
+.node-title{
+    margin-top:13px;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    color:#b5d5e9;
+    white-space:nowrap;
+}
+
+.node-sub{
+    color:#566b7e;
+    font-size:9px;
+    margin-top:3px;
+    letter-spacing:.5px;
+}
+
+/* ================= POSITIONS ================= */
+
+.node-users{
+    left:3%;
+}
+
+.node-ai{
+    left:24%;
+}
+
+.node-manager{
+    left:45%;
+}
+
+.node-queue{
+    left:66%;
+}
+
+.node-server{
+    right:3%;
+}
+
+/* ================= AI ================= */
+
+.node-ai .node-circle{
+    border-color:rgba(102,203,255,.7);
+    box-shadow:
+        0 0 28px rgba(68,181,255,.28),
+        0 0 60px rgba(75,195,255,.12),
+        inset 0 0 25px rgba(70,180,255,.12);
+}
+
+.node-ai .node-circle::before{
+    animation:
+        orbitRing 2.8s linear infinite,
+        aiScan 2s ease-in-out infinite;
+}
+
+@keyframes aiScan{
+    0%{
+        border-top-color:#73d5ff;
+        border-right-color:rgba(115,213,255,.8);
+        box-shadow:0 0 8px rgba(115,213,255,.2);
+    }
+    25%{
+        border-right-color:#b7edff;
+        border-bottom-color:rgba(115,213,255,.7);
+    }
+    50%{
+        border-bottom-color:#73d5ff;
+        border-left-color:rgba(115,213,255,.8);
+        box-shadow:0 0 18px rgba(115,213,255,.45);
+    }
+    75%{
+        border-left-color:#b7edff;
+        border-top-color:rgba(115,213,255,.7);
+    }
+    100%{
+        border-top-color:#73d5ff;
+        border-right-color:rgba(115,213,255,.8);
+        transform:rotate(360deg);
+        box-shadow:0 0 8px rgba(115,213,255,.2);
+    }
+}
+
+.node-ai .node-circle::after{
+    inset:-16px;
+    border:1px solid rgba(115,213,255,.18);
+    border-left-color:#73d5ff;
+    border-right-color:transparent;
+    animation:aiOuterRing 5s linear infinite;
+}
+
+@keyframes aiOuterRing{
+    0%{
+        transform:rotate(0deg) scale(.96);
+        opacity:.35;
+    }
+    50%{
+        opacity:1;
+    }
+    100%{
+        transform:rotate(-360deg) scale(1.04);
+        opacity:.35;
+    }
+}
+
+.node-ai .node-circle{
+    animation:aiCore 2.2s ease-in-out infinite;
+}
+
+@keyframes aiCore{
+    0%,100%{
+        box-shadow:
+            0 0 22px rgba(68,181,255,.25),
+            0 0 45px rgba(75,195,255,.08),
+            inset 0 0 22px rgba(70,180,255,.08);
+    }
+    50%{
+        box-shadow:
+            0 0 35px rgba(68,181,255,.45),
+            0 0 75px rgba(75,195,255,.16),
+            inset 0 0 30px rgba(70,180,255,.15);
+    }
+}
+
+/* ================= TRAFFIC MANAGER ================= */
+
+.node-manager .node-circle{
+    width:92px;
+    height:92px;
+    border-color:rgba(103,211,255,.85);
+    box-shadow:
+        0 0 35px rgba(75,195,255,.35),
+        0 0 80px rgba(75,150,255,.14),
+        inset 0 0 25px rgba(70,180,255,.12);
+    animation:managerCore 2.5s ease-in-out infinite;
+}
+
+@keyframes managerCore{
+    0%,100%{
+        box-shadow:
+            0 0 28px rgba(75,195,255,.25),
+            0 0 65px rgba(75,150,255,.08),
+            inset 0 0 25px rgba(70,180,255,.1);
+    }
+    50%{
+        box-shadow:
+            0 0 42px rgba(75,195,255,.42),
+            0 0 95px rgba(75,150,255,.16),
+            inset 0 0 30px rgba(70,180,255,.16);
+    }
+}
+
+.node-manager .node-circle span{
+    font-size:18px;
+}
+
+/* ================= QUEUE ================= */
+
+.queue-bars{
+    position:absolute;
+    width:48px;
+    height:18px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap:3px;
+}
+
+.queue-bars i{
+    display:block;
+    width:5px;
+    background:#72d4ff;
+    border-radius:3px;
+    box-shadow:0 0 8px rgba(80,200,255,.35);
+    animation:queueBars 1.2s ease-in-out infinite;
+}
+
+.queue-bars i:nth-child(1){
+    height:7px;
+}
+
+.queue-bars i:nth-child(2){
+    height:13px;
+    animation-delay:.15s;
+}
+
+.queue-bars i:nth-child(3){
+    height:18px;
+    animation-delay:.3s;
+}
+
+.queue-bars i:nth-child(4){
+    height:10px;
+    animation-delay:.45s;
+}
+
+@keyframes queueBars{
+    50%{
+        opacity:.35;
+        transform:scaleY(.55);
+    }
+}
+
+/* ================= BACKEND POOL ================= */
+
+.backend-stack{
+    position:absolute;
+    width:34px;
+    height:34px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    overflow:hidden;
+}
+
+.backend-stack span{
+    position:absolute;
+    left:0;
+    width:34px;
+    height:5px;
+    border:1px solid rgba(105,203,255,.5);
+    border-radius:3px;
+    background:#0d1c29;
+    box-shadow:0 0 8px rgba(70,180,255,.1);
+    animation:serverBlink 2s ease-in-out infinite;
+}
+
+.backend-stack span:nth-child(1){
+    top:1px;
+}
+
+.backend-stack span:nth-child(2){
+    top:10px;
+    animation-delay:.3s;
+}
+
+.backend-stack span:nth-child(3){
+    top:19px;
+    animation-delay:.6s;
+}
+
+.backend-stack span:nth-child(4){
+    top:28px;
+    animation-delay:.9s;
+}
+
+@keyframes serverBlink{
+    0%,100%{
+        border-color:rgba(105,203,255,.35);
+        box-shadow:0 0 6px rgba(70,180,255,.08);
+    }
+    50%{
+        border-color:rgba(100,220,255,.95);
+        box-shadow:
+            0 0 12px rgba(80,200,255,.35),
+            0 0 22px rgba(80,200,255,.12);
+    }
+}
+
+/* ================= AI SIGNAL ================= */
+
+.ai-signal{
+    display:none;
+}
+
+@keyframes signalPulse{
+    0%,100%{
+        opacity:.2;
+        transform:scaleX(.65);
+    }
+    50%{
+        opacity:1;
+        transform:scaleX(1);
+    }
+}
+
+/* ================= VISUAL CAPTION ================= */
+
+.visual-caption{
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#526679;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+.flow-line{
+    position:absolute;
+    left:4%;
+    right:4%;
+    top:50%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(91,190,255,.18),
+        rgba(91,190,255,.5),
+        rgba(91,190,255,.18),
+        transparent
+    );
+}
+
+.traffic-particle{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#73d5ff;
+    box-shadow:
+        0 0 8px #73d5ff,
+        0 0 20px rgba(73,190,255,.8);
+    top:calc(50% - 2px);
+    z-index:10;
+}
+
+.tp1{
+    animation:trafficMove 4s linear infinite;
+}
+
+.tp2{
+    animation:trafficMove 4s linear infinite 1.2s;
+}
+
+.tp3{
+    animation:trafficMove 4s linear infinite 2.4s;
+}
+
+.tp4{
+    animation:trafficMove 4s linear infinite 3.2s;
+}
+
+@keyframes trafficMove{
+    0%{
+        left:3%;
+        opacity:0;
+    }
+
+    8%{
+        opacity:1;
+    }
+
+    45%{
+        opacity:1;
+    }
+
+    52%{
+        opacity:.1;
+    }
+
+    58%{
+        opacity:1;
+    }
+
+    92%{
+        opacity:1;
+    }
+
+    100%{
+        left:97%;
+        opacity:0;
+    }
+}
+
+/* ================= SYSTEM NODES ================= */
+
+.system-node{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:20;
+    text-align:center;
+}
+
+.node-circle{
+    width:74px;
+    height:74px;
+    margin:auto;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #203d58,
+            #071019 72%
+        );
+    border:1px solid rgba(102,203,255,.45);
+    box-shadow:
+        0 0 25px rgba(68,181,255,.2),
+        inset 0 0 20px rgba(70,180,255,.08);
+    position:relative;
+}
+
+.node-circle::after{
+    content:"";
+    position:absolute;
+    inset:-8px;
+    border:1px solid rgba(80,180,255,.12);
+    border-radius:50%;
+    animation:nodePulse 3s ease-in-out infinite;
+}
+
+@keyframes nodePulse{
+    0%,100%{
+        transform:scale(.95);
+        opacity:.4;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:1;
+    }
+}
+
+.node-circle span{
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:1px;
+    color:#e8f8ff;
+}
+
+.node-title{
+    margin-top:13px;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    color:#a9c7dd;
+    white-space:nowrap;
+}
+
+.node-sub{
+    color:#566b7e;
+    font-size:9px;
+    margin-top:3px;
+}
+
+/* ================= POSITIONS ================= */
+
+.node-users{
+    left:3%;
+}
+
+.node-ai{
+    left:24%;
+}
+
+.node-manager{
+    left:45%;
+}
+
+.node-queue{
+    left:66%;
+}
+
+.node-server{
+    right:3%;
+}
+
+/* ================= AI GLOW ================= */
+
+.node-ai .node-circle{
+    border-color:rgba(102,203,255,.65);
+    box-shadow:
+        0 0 28px rgba(68,181,255,.3),
+        0 0 55px rgba(75,195,255,.12),
+        inset 0 0 25px rgba(70,180,255,.12);
+}
+
+/* ================= TRAFFIC MANAGER ================= */
+
+.node-manager .node-circle{
+    width:92px;
+    height:92px;
+    border-color:rgba(103,211,255,.75);
+    box-shadow:
+        0 0 35px rgba(75,195,255,.35),
+        0 0 80px rgba(75,150,255,.12),
+        inset 0 0 25px rgba(70,180,255,.12);
+}
+
+.node-manager .node-circle span{
+    font-size:13px;
+}
+
+/* ================= QUEUE ================= */
+
+.queue-bars{
+    position:absolute;
+    width:48px;
+    height:18px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    gap:3px;
+}
+
+.queue-bars i{
+    display:block;
+    width:5px;
+    background:#72d4ff;
+    border-radius:3px;
+    animation:queueBars 1.2s ease-in-out infinite;
+}
+
+.queue-bars i:nth-child(1){
+    height:7px;
+}
+
+.queue-bars i:nth-child(2){
+    height:13px;
+    animation-delay:.15s;
+}
+
+.queue-bars i:nth-child(3){
+    height:18px;
+    animation-delay:.3s;
+}
+
+.queue-bars i:nth-child(4){
+    height:10px;
+    animation-delay:.45s;
+}
+
+@keyframes queueBars{
+    50%{
+        opacity:.35;
+        transform:scaleY(.55);
+    }
+}
+
+/* ================= BACKEND POOL ================= */
+
+.backend-stack{
+    position:absolute;
+    width:34px;
+    height:34px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    overflow:hidden;
+}
+
+.backend-stack span{
+    position:absolute;
+    left:0;
+    width:34px;
+    height:5px;
+    border:1px solid rgba(105,203,255,.5);
+    border-radius:3px;
+    background:#0d1c29;
+    box-shadow:0 0 8px rgba(70,180,255,.1);
+    animation:serverBlink 2s ease-in-out infinite;
+}
+
+.backend-stack span:nth-child(1){
+    top:1px;
+}
+
+.backend-stack span:nth-child(2){
+    top:10px;
+    animation-delay:.3s;
+}
+
+.backend-stack span:nth-child(3){
+    top:19px;
+    animation-delay:.6s;
+}
+
+.backend-stack span:nth-child(4){
+    top:28px;
+    animation-delay:.9s;
+}
+
+@keyframes serverBlink{
+    50%{
+        border-color:rgba(100,220,255,.95);
+        box-shadow:0 0 12px rgba(80,200,255,.25);
+    }
+}
+
+/* ================= AI SIGNAL ================= */
+
+.ai-signal{
+    position:absolute;
+    left:24%;
+    top:32%;
+    width:110px;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #73d5ff,
+        transparent
+    );
+    opacity:.5;
+    animation:signalPulse 2s ease-in-out infinite;
+}
+
+@keyframes signalPulse{
+    0%,100%{
+        opacity:.2;
+        transform:scaleX(.7);
+    }
+
+    50%{
+        opacity:1;
+        transform:scaleX(1);
+    }
+}
+
+/* ================= VISUAL CAPTION ================= */
+
+.visual-caption{
+    position:absolute;
+    bottom:12px;
+    left:50%;
+    transform:translateX(-50%);
+    color:#526679;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    white-space:nowrap;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:105px 0;
+}
+
+.section-head{
+    max-width:700px;
+    margin-bottom:50px;
+}
+
+.section-head h2{
+    margin-top:12px;
+    font-size:clamp(32px,4vw,50px);
+    line-height:1.1;
+    letter-spacing:-2px;
+}
+
+.section-head p{
+    margin-top:15px;
+    color:#8796a7;
+}
+
+/* ================= PROBLEM ================= */
+
+.problem{
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.problem-card{
+    padding:30px;
+    border:1px solid rgba(255,255,255,.08);
+    background:#080c12;
+    border-radius:14px;
+}
+
+.problem-card h3{
+    margin-bottom:12px;
+}
+
+.problem-card p{
+    color:#8492a2;
+    font-size:14px;
+}
+
+/* ================= SOLUTION ================= */
+
+.solution{
+    background:#070a0f;
+    border-top:1px solid rgba(255,255,255,.05);
+    border-bottom:1px solid rgba(255,255,255,.05);
+}
+
+.solution-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.solution-card{
+    padding:28px;
+    border-top:1px solid rgba(100,190,255,.3);
+    background:linear-gradient(
+        180deg,
+        rgba(80,170,255,.045),
+        transparent
+    );
+    transition:.3s;
+}
+
+.solution-card:hover{
+    transform:translateY(-5px);
+    border-top-color:#6acbff;
+}
+
+.solution-number{
+    color:#526579;
+    font-size:11px;
+    letter-spacing:1px;
+    margin-bottom:25px;
+}
+
+.solution-card h3{
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.solution-card p{
+    color:#8492a2;
+    font-size:14px;
+}
+
+/* ================= ARCHITECTURE ================= */
+
+.architecture-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:55px;
+}
+
+.flow-box{
+    padding:20px 25px;
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:10px;
+    background:#0a0f16;
+    color:#d6e0eb;
+    font-size:14px;
+    text-align:center;
+    min-width:140px;
+}
+
+.flow-box small{
+    display:block;
+    color:#64778b;
+    margin-top:4px;
+    font-size:10px;
+}
+
+.flow-arrow{
+    color:#4e687e;
+    padding:0 10px;
+    font-size:20px;
+}
+
+/* ================= QUEUE ================= */
+
+.queue-demo{
+    margin-top:50px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    overflow:hidden;
+    background:#080c12;
+}
+
+.queue-header{
+    padding:18px 22px;
+    border-bottom:1px solid rgba(255,255,255,.07);
+    display:flex;
+    justify-content:space-between;
+}
+
+.queue-header span{
+    color:#68798b;
+    font-size:12px;
+}
+
+.queue-body{
+    padding:25px;
+}
+
+.queue-row{
+    display:grid;
+    grid-template-columns:80px 1fr 120px;
+    gap:20px;
+    padding:15px 0;
+    border-bottom:1px solid rgba(255,255,255,.05);
+    color:#a9b7c5;
+    font-size:13px;
+}
+
+.queue-row:last-child{
+    border-bottom:0;
+}
+
+.processing{
+    color:#61dfa0;
+}
+
+.waiting{
+    color:#f0c46a;
+}
+
+/* ================= SCALING ================= */
+
+.scale-section{
+    background:#070a0f;
+}
+
+.scale-visual{
+    margin-top:45px;
+    padding:30px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    background:#080c12;
+}
+
+.capacity{
+    display:flex;
+    align-items:flex-end;
+    gap:8px;
+    height:190px;
+    padding:12px;
+    box-sizing:border-box;
+    border:1px solid rgba(104,202,255,.14);
+    border-radius:10px;
+    overflow:hidden;
+    position:relative;
+}
+
+.server{
+    flex:1;
+    min-width:20px;
+    max-width:100%;
+    border-radius:5px 5px 2px 2px;
+    background:linear-gradient(
+        to top,
+        #1769a1,
+        #68caff
+    );
+    box-shadow:0 0 18px rgba(75,180,255,.15);
+    animation:serverPulse 3s ease-in-out infinite;
+    transform-origin:bottom center;
+}
+
+.server:nth-child(1){
+    height:45%;
+    animation-delay:.1s;
+}
+
+.server:nth-child(2){
+    height:60%;
+    animation-delay:.3s;
+}
+
+.server:nth-child(3){
+    height:52%;
+    animation-delay:.5s;
+}
+
+.server:nth-child(4){
+    height:72%;
+    animation-delay:.7s;
+}
+
+.server:nth-child(5){
+    height:48%;
+    animation-delay:.9s;
+}
+
+.server:nth-child(6){
+    height:82%;
+    animation-delay:1.1s;
+}
+
+.server:nth-child(7){
+    height:92%;
+    animation-delay:1.3s;
+}
+
+.server:nth-child(8){
+    height:68%;
+    animation-delay:1.5s;
+}
+
+@keyframes serverPulse{
+    50%{
+        opacity:.72;
+        transform:scaleY(.94);
+    }
+}
+
+.scale-caption{
+    margin-top:20px;
+    color:#78899a;
+    font-size:13px;
+}
+
+/* ================= AI ================= */
+
+.ai-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.ai-text h2{
+    font-size:42px;
+    line-height:1.1;
+}
+
+.ai-text p{
+    color:#8795a5;
+    margin-top:18px;
+}
+
+.ai-panel{
+    padding:30px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    background:#080c12;
+}
+
+.prediction{
+    display:flex;
+    justify-content:space-between;
+    padding:17px 0;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.prediction:last-child{
+    border:0;
+}
+
+.prediction span:first-child{
+    color:#738497;
+}
+
+.prediction strong{
+    color:#dce8f4;
+}
+
+/* ================= DIFFERENCE ================= */
+
+.difference{
+    border-top:1px solid rgba(255,255,255,.06);
+}
+
+.diff-table{
+    margin-top:45px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:15px;
+    overflow:hidden;
+}
+
+.diff-row{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    padding:18px 22px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:13px;
+}
+
+.diff-row:last-child{
+    border:0;
+}
+
+.diff-row.header{
+    background:#0a1017;
+    color:#b9c8d7;
+    font-weight:700;
+}
+
+.diff-row div:nth-child(2){
+    color:#8797a8;
+}
+
+.diff-row div:nth-child(3){
+    color:#69c9ff;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+    text-align:center;
+    padding:125px 20px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(60,130,255,.11),
+            transparent 60%
+        );
+}
+
+.cta h2{
+    font-size:clamp(35px,5vw,58px);
+    line-height:1.1;
+    letter-spacing:-2px;
+}
+
+.cta p{
+    color:#8796a7;
+    margin:16px auto 28px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:28px 0;
+    border-top:1px solid rgba(255,255,255,.07);
+    color:#637283;
+    font-size:12px;
+}
+
+.footer-inner{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.footer-brand{
+    color:#aebbc8;
+    font-weight:700;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .nav-links{
+        display:none;
+    }
+
+    .traffic-visual{
+        transform:scale(.85);
+        transform-origin:center;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .problem-grid,
+    .ai-grid{
+        grid-template-columns:1fr;
+    }
+
+    .solution-grid{
+        grid-template-columns:1fr;
+    }
+
+    .architecture-flow{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .flow-arrow{
+        transform:rotate(90deg);
+    }
+
+    .flow-box{
+        width:100%;
+    }
+
+    .queue-row{
+        grid-template-columns:65px 1fr 90px;
+    }
+}
+
+@media(max-width:600px){
+
+    section{
+        padding:80px 0;
+    }
+
+    .hero{
+        padding-top:125px;
+    }
+
+    .hero h1{
+        letter-spacing:-2px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .traffic-visual{
+        transform:scale(.58);
+        transform-origin:center top;
+        height:300px;
+        margin-top:45px;
+        margin-bottom:-45px;
+    }
+
+    .queue-row{
+        grid-template-columns:60px 1fr 75px;
+        font-size:11px;
+    }
+
+    .diff-row{
+        grid-template-columns:1fr;
+        gap:7px;
+    }
+
+    .footer-inner{
+        flex-direction:column;
+    }
+}
+</style>
+
+
+
+
+
+
+
+<style id="body-text-upgrade">
+p{
+    font-size:18px;
+    line-height:1.75;
+}
+
+li{
+    font-size:17px;
+    line-height:1.7;
+}
+
+.feature-text,
+.description,
+.card-text,
+.solution-text{
+    font-size:17px;
+    line-height:1.7;
+}
+</style>
+
+
+<style id="architecture-text-upgrade">
+#architecture .section-head p{
+    font-size:18px;
+    line-height:1.7;
+}
+
+#architecture .flow-box{
+    font-size:18px;
+    font-weight:700;
+}
+
+#architecture .flow-box small{
+    font-size:14px;
+    margin-top:6px;
+}
+
+#architecture .flow-arrow{
+    font-size:24px;
+}
+</style>
+
+
+<style id="architecture-horizontal-fix">
+#architecture .architecture-flow{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:nowrap;
+    gap:8px;
+    width:100%;
+}
+
+#architecture .flow-box{
+    flex:0 1 auto;
+    min-width:125px;
+    padding:18px 16px;
+    white-space:nowrap;
+}
+
+#architecture .flow-box small{
+    white-space:nowrap;
+}
+
+#architecture .flow-arrow{
+    flex:0 0 auto;
+    padding:0 4px;
+    font-size:22px;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- ================= NAV ================= -->
+
+<nav>
+
+<div class="container nav-inner">
+
+<a href="company.html" class="logo">
+
+<div class="logo-mark">
+NX
+</div>
+
+<span>NEXAITORA</span>
+
+</a>
+
+<div class="nav-links">
+
+<a href="company.html">Home</a>
+
+<a href="#solution">Solution</a>
+
+<a href="#architecture">Architecture</a>
+
+<a href="#technology">Technology</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<header class="hero">
+
+<div class="container">
+
+<div class="label">
+NEXAITORA TECHNOLOGIES / PRODUCT
+</div>
+
+<h1>
+
+Smart Result<br>
+
+<span class="gradient">
+Traffic Manager
+</span>
+
+</h1>
+
+<p>
+
+Intelligent traffic orchestration designed to keep
+high-demand result systems responsive, scalable,
+and reliable when thousands of users arrive at once.
+
+</p>
+
+<div class="buttons">
+
+<a
+href="http://127.0.0.1:8080/"
+class="btn primary"
+>
+Launch Live Demo
+</a>
+
+<a
+href="#architecture"
+class="btn secondary"
+>
+Explore Architecture
+</a>
+
+</div>
+
+
+<!-- ================= TRAFFIC ANIMATION ================= -->
+
+<div class="traffic-visual">
+
+<div class="flow-line"></div>
+
+<div class="ai-signal"></div>
+
+
+<!-- USERS -->
+
+<div class="system-node node-users">
+
+<div class="node-circle">
+
+<span>USERS</span>
+
+</div>
+
+<div class="node-title">
+INCOMING TRAFFIC
+</div>
+
+<div class="node-sub">
+REQUEST STREAM
+</div>
+
+</div>
+
+
+<!-- AI -->
+
+<div class="system-node node-ai">
+
+<div class="node-circle">
+
+<span>AI</span>
+
+</div>
+
+<div class="node-title">
+AI CONTROL
+</div>
+
+<div class="node-sub">
+PREDICTION
+</div>
+
+</div>
+
+
+<!-- TRAFFIC MANAGER -->
+
+<div class="system-node node-manager">
+
+<div class="node-circle">
+
+<span>TM</span>
+
+</div>
+
+<div class="node-title">
+TRAFFIC MANAGER
+</div>
+
+<div class="node-sub">
+ORCHESTRATION
+</div>
+
+</div>
+
+
+<!-- QUEUE -->
+
+<div class="system-node node-queue">
+
+<div class="node-circle">
+
+<div class="queue-bars">
+
+<i></i>
+<i></i>
+<i></i>
+<i></i>
+
+</div>
+
+</div>
+
+<div class="node-title">
+QUEUE
+</div>
+
+<div class="node-sub">
+LOAD CONTROL
+</div>
+
+</div>
+
+
+<!-- BACKEND -->
+
+<div class="system-node node-server">
+
+<div class="node-circle">
+
+<div class="backend-stack">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+</div>
+
+<div class="node-title">
+BACKEND POOL
+</div>
+
+<div class="node-sub">
+AUTO SCALE
+</div>
+
+</div>
+
+
+<!-- DATA -->
+
+<div class="traffic-particle tp1"></div>
+<div class="traffic-particle tp2"></div>
+<div class="traffic-particle tp3"></div>
+<div class="traffic-particle tp4"></div>
+
+
+<div class="visual-caption">
+INTELLIGENT TRAFFIC FLOW
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ================= PROBLEM ================= -->
+
+<section class="problem">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="label">
+THE PROBLEM
+</div>
+
+<h2>
+When everyone checks results at once.
+</h2>
+
+<p>
+Result announcements can create sudden traffic spikes
+that traditional systems may struggle to handle.
+</p>
+
+</div>
+
+<div class="problem-grid">
+
+<div class="problem-card">
+
+<h3>
+Traffic Surge
+</h3>
+
+<p>
+Thousands of students may request their results
+within a very short period of time.
+</p>
+
+</div>
+
+<div class="problem-card">
+
+<h3>
+Backend Overload
+</h3>
+
+<p>
+Sending every request directly to the same backend
+can increase processing pressure dramatically.
+</p>
+
+</div>
+
+<div class="problem-card">
+
+<h3>
+Long Waiting
+</h3>
+
+<p>
+Users may experience slow responses or repeated
+refreshes when the system becomes overloaded.
+</p>
+
+</div>
+
+<div class="problem-card">
+
+<h3>
+Uncontrolled Demand
+</h3>
+
+<p>
+Without traffic coordination, a temporary spike can
+affect the entire service.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= SOLUTION ================= -->
+
+<section id="solution" class="solution">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="label">
+THE SOLUTION
+</div>
+
+<h2>
+Control traffic before traffic controls the system.
+</h2>
+
+<p>
+Smart Result Traffic Manager introduces an intelligent
+coordination layer between users and result backends.
+</p>
+
+</div>
+
+<div class="solution-grid">
+
+<div class="solution-card">
+
+<div class="solution-number">
+01 / ROUTING
+</div>
+
+<h3>
+Intelligent Routing
+</h3>
+
+<p>
+Incoming requests are distributed across healthy
+backend servers instead of concentrating demand
+on one destination.
+</p>
+
+</div>
+
+
+<div class="solution-card">
+
+<div class="solution-number">
+02 / QUEUE
+</div>
+
+<h3>
+Smart Queue
+</h3>
+
+<p>
+When demand exceeds current processing capacity,
+requests are safely queued with a visible position.
+</p>
+
+</div>
+
+
+<div class="solution-card">
+
+<div class="solution-number">
+03 / SCALING
+</div>
+
+<h3>
+Automatic Scaling
+</h3>
+
+<p>
+Additional backend capacity can be activated when
+queue pressure or utilization rises.
+</p>
+
+</div>
+
+
+<div class="solution-card">
+
+<div class="solution-number">
+04 / HEALTH
+</div>
+
+<h3>
+Backend Health
+</h3>
+
+<p>
+Unhealthy backends can be detected and removed from
+active traffic distribution.
+</p>
+
+</div>
+
+
+<div class="solution-card">
+
+<div class="solution-number">
+05 / AI
+</div>
+
+<h3>
+AI Traffic Control
+</h3>
+
+<p>
+AI-assisted release timing and traffic prediction
+help prepare infrastructure for expected demand.
+</p>
+
+</div>
+
+
+<div class="solution-card">
+
+<div class="solution-number">
+06 / HISTORY
+</div>
+
+<h3>
+Request Analytics
+</h3>
+
+<p>
+Requests can be recorded and analyzed to understand
+traffic behavior and system performance.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= ARCHITECTURE ================= -->
+
+<section id="architecture">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="label">
+SYSTEM ARCHITECTURE
+</div>
+
+<h2>
+From request to result.
+</h2>
+
+<p>
+Every request follows a controlled path through the
+traffic management layer.
+</p>
+
+</div>
+
+<div class="architecture-flow">
+
+<div class="flow-box">
+Students
+<small>Incoming users</small>
+</div>
+
+<div class="flow-arrow">→</div>
+
+<div class="flow-box">
+Result Portal
+<small>Request entry</small>
+</div>
+
+<div class="flow-arrow">→</div>
+
+<div class="flow-box">
+Traffic Manager
+<small>Decision layer</small>
+</div>
+
+<div class="flow-arrow">→</div>
+
+<div class="flow-box">
+Queue
+<small>Load control</small>
+</div>
+
+<div class="flow-arrow">→</div>
+
+<div class="flow-box">
+Backend Pool
+<small>Processing</small>
+</div>
+
+<div class="flow-arrow">→</div>
+
+<div class="flow-box">
+Result
+<small>Response</small>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= QUEUE ================= -->
+
+<section class="solution">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="label">
+QUEUE MANAGEMENT
+</div>
+
+<h2>
+Waiting becomes predictable.
+</h2>
+
+<p>
+Instead of repeatedly sending requests to an overloaded
+backend, users receive a controlled position in the queue.
+</p>
+
+</div>
+
+<div class="queue-demo">
+
+<div class="queue-header">
+
+<strong>
+Live Request Queue
+</strong>
+
+<span>
+Maximum active requests: 16
+</span>
+
+</div>
+
+<div class="queue-body">
+
+<div class="queue-row">
+
+<span>10001</span>
+
+<span>
+Processing result
+</span>
+
+<span class="processing">
+PROCESSING
+</span>
+
+</div>
+
+<div class="queue-row">
+
+<span>10002</span>
+
+<span>
+Processing result
+</span>
+
+<span class="processing">
+PROCESSING
+</span>
+
+</div>
+
+<div class="queue-row">
+
+<span>10003</span>
+
+<span>
+Waiting for capacity
+</span>
+
+<span class="waiting">
+WAITING #1
+</span>
+
+</div>
+
+<div class="queue-row">
+
+<span>10004</span>
+
+<span>
+Waiting for capacity
+</span>
+
+<span class="waiting">
+WAITING #2
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= AUTO SCALING ================= -->
+
+<section class="scale-section">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="label">
+AUTO SCALING
+</div>
+
+<h2>
+Capacity follows demand.
+</h2>
+
+<p>
+The system can activate additional backend resources
+when traffic pressure increases.
+</p>
+
+</div>
+
+<div class="scale-visual">
+
+<div class="capacity">
+
+<div class="server"></div>
+<div class="server"></div>
+<div class="server"></div>
+<div class="server"></div>
+<div class="server"></div>
+<div class="server"></div>
+<div class="server"></div>
+<div class="server"></div>
+
+</div>
+
+<div class="scale-caption">
+Backend capacity dynamically adapts to system pressure.
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= AI ================= -->
+
+<section id="technology">
+
+<div class="container">
+
+<div class="ai-grid">
+
+<div class="ai-text">
+
+<div class="label">
+AI TRAFFIC INTELLIGENCE
+</div>
+
+<h2>
+Prepare before the spike.
+</h2>
+
+<p>
+NEXAITORA's vision is not only to react to traffic,
+but to anticipate it.
+</p>
+
+<p>
+AI-assisted traffic prediction can identify expected
+demand patterns and help infrastructure prepare
+capacity before a major result announcement.
+</p>
+
+</div>
+
+
+<div class="ai-panel">
+
+<div class="prediction">
+
+<span>
+Traffic Forecast
+</span>
+
+<strong>
+HIGH
+</strong>
+
+</div>
+
+<div class="prediction">
+
+<span>
+Expected Demand
+</span>
+
+<strong>
+2.8×
+</strong>
+
+</div>
+
+<div class="prediction">
+
+<span>
+Recommended Capacity
+</span>
+
+<strong>
+32
+</strong>
+
+</div>
+
+<div class="prediction">
+
+<span>
+Scaling Controller
+</span>
+
+<strong>
+READY
+</strong>
+
+</div>
+
+<div class="prediction">
+
+<span>
+System State
+</span>
+
+<strong>
+PREPARING
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= DIFFERENCE ================= -->
+
+<section class="difference">
+
+<div class="container">
+
+<div class="section-head">
+
+<div class="label">
+WHY IT MATTERS
+</div>
+
+<h2>
+A different approach to traffic.
+</h2>
+
+<p>
+The goal is not simply to process more requests.
+It is to coordinate demand intelligently.
+</p>
+
+</div>
+
+<div class="diff-table">
+
+<div class="diff-row header">
+
+<div>
+Traditional approach
+</div>
+
+<div>
+Challenge
+</div>
+
+<div>
+NEXAITORA approach
+</div>
+
+</div>
+
+
+<div class="diff-row">
+
+<div>
+Direct backend requests
+</div>
+
+<div>
+Concentrated load
+</div>
+
+<div>
+Intelligent routing
+</div>
+
+</div>
+
+
+<div class="diff-row">
+
+<div>
+Repeated refreshes
+</div>
+
+<div>
+More traffic
+</div>
+
+<div>
+Controlled queue
+</div>
+
+</div>
+
+
+<div class="diff-row">
+
+<div>
+Fixed capacity
+</div>
+
+<div>
+Limited resources
+</div>
+
+<div>
+Automatic scaling
+</div>
+
+</div>
+
+
+<div class="diff-row">
+
+<div>
+React after overload
+</div>
+
+<div>
+Slow recovery
+</div>
+
+<div>
+Predict and prepare
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container footer-inner">
+
+<div>
+
+<span class="footer-brand">
+NEXAITORA Technologies
+</span>
+
+— Intelligence That Keeps Systems Moving.
+
+</div>
+
+<div>
+© 2026 NEXAITORA Technologies
+</div>
+
+</div>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Result Traffic Manager</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1020;
+    color: #f5f7ff;
+    min-height: 100vh;
+}
+
+.container {
+    width: 94%;
+    max-width: 1450px;
+    margin: auto;
+    padding: 25px 0 40px;
+}
+
+/* HEADER */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.title h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.title p {
+    color: #9da8c4;
+    font-size: 14px;
+}
+
+.health {
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 1px solid #2f405e;
+    background: #111a2e;
+}
+
+.health.normal {
+    color: #48e59a;
+}
+
+.health.busy {
+    color: #ffd45c;
+}
+
+.health.critical {
+    color: #ff6377;
+    animation: pulse 1s infinite;
+}
+
+.dot {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    margin-right: 8px;
+    background: currentColor;
+    animation: blink 1.2s infinite;
+}
+
+/* BUTTONS */
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+button {
+    border: none;
+    border-radius: 9px;
+    padding: 12px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.start {
+    background: #3268ff;
+    color: white;
+}
+
+.reset {
+    background: #202b43;
+    color: #dce4f7;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.card {
+    background: #121a2d;
+    border: 1px solid #26334e;
+    border-radius: 13px;
+    padding: 18px;
+    min-height: 110px;
+    transition: .25s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: #4268b5;
+}
+
+.card-label {
+    color: #9da8c4;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.card-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.card-sub {
+    margin-top: 7px;
+    font-size: 11px;
+    color: #687793;
+}
+
+/* MAIN GRID */
+
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+}
+
+.panel {
+    background: #121a2d;
+    border: 1px solid #26334e;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.panel-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.panel-title h2 {
+    font-size: 17px;
+}
+
+.panel-title span {
+    color: #71809d;
+    font-size: 12px;
+}
+
+/* GRAPH */
+
+.graph-box {
+    height: 280px;
+    position: relative;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* TRAFFIC FLOW */
+
+.flow-panel {
+    margin-top: 18px;
+}
+
+.flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.flow-box {
+    flex: 1;
+    min-height: 90px;
+    background: #0d1527;
+    border: 1px solid #293852;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+}
+
+.flow-icon {
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.flow-name {
+    font-size: 12px;
+    color: #aab5ca;
+}
+
+.flow-number {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.arrow {
+    color: #4e78ff;
+    font-size: 22px;
+    animation: moveArrow 1s infinite;
+}
+
+/* HEALTH */
+
+.health-panel {
+    margin-bottom: 18px;
+}
+
+.health-big {
+    text-align: center;
+    padding: 20px 10px;
+}
+
+.health-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #18263b;
+    border: 5px solid #48e59a;
+    color: #48e59a;
+    font-weight: bold;
+    animation: glow 2s infinite;
+}
+
+.health-message {
+    margin-top: 15px;
+    color: #9da8c4;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* QUEUE */
+
+.queue-panel {
+    margin-top: 18px;
+}
+
+.queue-list {
+    max-height: 310px;
+    overflow-y: auto;
+}
+
+.queue-item {
+    display: grid;
+    grid-template-columns: 35px 1fr 110px 100px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 8px;
+    border-bottom: 1px solid #202c43;
+    font-size: 13px;
+}
+
+.queue-number {
+    color: #70809d;
+}
+
+.roll {
+    font-weight: bold;
+}
+
+.status {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.status.WAITING {
+    color: #ffd45c;
+}
+
+.status.PROCESSING {
+    color: #5e9bff;
+}
+
+.status.COMPLETED {
+    color: #48e59a;
+}
+
+.status.FAILED {
+    color: #ff6377;
+}
+
+.empty {
+    text-align: center;
+    color: #687793;
+    padding: 30px;
+}
+
+/* FOOTER */
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #56647e;
+    font-size: 12px;
+}
+
+/* ANIMATIONS */
+
+@keyframes blink {
+    50% { opacity: .35; }
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.04); }
+}
+
+@keyframes glow {
+    50% {
+        box-shadow: 0 0 25px rgba(72,229,154,.25);
+    }
+}
+
+@keyframes moveArrow {
+    50% {
+        transform: translateX(5px);
+    }
+}
+
+@media(max-width:1100px) {
+    .cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width:650px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flow {
+        flex-direction: column;
+    }
+
+    .flow-box {
+        width: 100%;
+    }
+
+    .arrow {
+        transform: rotate(90deg);
+    }
+
+    .queue-item {
+        grid-template-columns: 25px 1fr 90px;
+    }
+}
+
+.history-summary {
+    margin-bottom: 15px;
+    padding: 12px 16px;
+    background: rgba(78, 120, 255, 0.08);
+    border-radius: 10px;
+}
+
+.history-summary strong {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.history-table-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 320px;
+    border-radius: 10px;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    padding: 12px 14px;
+    text-align: left;
+    border-bottom: 1px solid #202c43;
+}
+
+.history-table th {
+    font-size: 13px;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.history-table td {
+    font-size: 14px;
+}
+
+.status-completed {
+    color: #48e59a;
+    font-weight: 600;
+}
+
+.status-failed {
+    color: #ff6b6b;
+    font-weight: 600;
+}
+
+.history-table .empty {
+    text-align: center;
+    padding: 25px;
+    opacity: 0.65;
+}
+
+
+.batch-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.batch-card {
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(78, 120, 255, 0.08);
+}
+
+.batch-card span {
+    display: block;
+    font-size: 12px;
+    opacity: 0.7;
+    margin-bottom: 6px;
+}
+
+.batch-card strong {
+    font-size: 22px;
+}
+
+.batch-progress {
+    width: 100%;
+    height: 12px;
+    margin-top: 20px;
+    background: #202c43;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#batchProgressBar {
+    width: 0%;
+    height: 100%;
+    border-radius: 20px;
+    background: #48e59a;
+    transition: width 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#batchProgressBar::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -40%;
+    width: 40%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.35);
+    animation: liveLoading 1.2s linear infinite;
+}
+
+@keyframes liveLoading {
+    from {
+        left: -40%;
+    }
+    to {
+        left: 100%;
+    }
+}
+
+.batch-progress-text {
+    text-align: right;
+    margin-top: 8px;
+    font-size: 13px;
+    opacity: 0.75;
+}
+
+@media (max-width: 900px) {
+    .batch-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+.batch-panel {
+    width: 100%;
+    box-sizing: border-box;
+}
+\n
+</style>
+</head>
+
+<body>
+<section style="margin:24px 0;padding:20px;border:1px solid rgba(0,255,200,.25);border-radius:16px;background:rgba(0,20,30,.65);">
+    <h2 style="margin:0 0 8px;">🤖 AI RELEASE CONTROL</h2>
+    <p style="opacity:.75;margin-top:0;">Schedule an exam result release using a natural-language command.</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <input
+            id="aiReleaseCommand" style="margin-top:8px; width:85%; background:#111827; color:#fff; border:1px solid #374151; padding:10px; border-radius:8px;"
+            type="text"
+            placeholder="release tomorrow at 10 am"
+            style="flex:1;min-width:260px;padding:12px;border-radius:10px;border:1px solid rgba(0,255,200,.3);background:#07141b;color:white;"
+        >
+        <button
+            id="aiReleaseButton"
+            onclick="registerAIRelease()"
+            style="padding:12px 18px;border:0;border-radius:10px;cursor:pointer;"
+        >
+            REGISTER RELEASE
+        </button>
+    </div>
+
+    <div id="aiReleaseStatus" style="margin-top:14px;line-height:1.6;">
+        AI controller ready.
+    </div>
+
+    <div id="aiLiveStatus" style="margin-top:10px;line-height:1.6;padding:10px;border-radius:8px;background:rgba(0,0,0,.2);">
+        🤖 AI Status: Checking...
+    </div>
+</section>
+
+
+<div class="container">
+
+    <div class="header">
+        <div class="title">
+            <h1>Smart Result Traffic Manager</h1>
+            <p>Real-time result traffic monitoring and queue protection</p>
+        </div>
+
+        <div id="healthBadge" class="health normal">
+            <span class="dot"></span>
+            <span id="healthText">NORMAL</span>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="start" onclick="startTrafficTest()">
+            ▶ Start Traffic Test
+        </button>
+
+        <button class="reset" onclick="resetStatistics()">
+            ↻ Reset Statistics
+        </button>
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="card-label">TOTAL REQUESTS</div>
+            <div id="totalRequests" class="card-value">0</div>
+            <div class="card-sub">All incoming requests</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">ACTIVE / PROCESSING</div>
+            <div id="activeRequests" class="card-value">0</div>
+            <div class="card-sub">Currently processing</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">WAITING QUEUE</div>
+            <div id="waitingQueue" class="card-value">0</div>
+            <div class="card-sub">Requests waiting</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">COMPLETED</div>
+            <div id="completedRequests" class="card-value">0</div>
+            <div class="card-sub">Successfully processed</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">FAILED</div>
+            <div id="failedRequests" class="card-value">0</div>
+            <div class="card-sub">Failed requests</div>
+        </div>
+
+        <div class="card">
+            <div class="card-label">MAXIMUM ACTIVE</div>
+            <div id="maxActive" class="card-value">2</div>
+            <div class="card-sub">Server protection limit</div>
+        </div>
+
+    </div>
+
+<div class="panel batch-panel">
+
+        <div class="panel-title">
+            <h2>Live Monitor</h2>
+            <span>Current traffic batch</span>
+        </div>
+
+        <div class="live-batch">
+            <span>Processing Progress</span>
+            <strong id="currentBatch">0 / 0</strong>
+        </div>
+
+        <div class="batch-progress">
+            <div id="batchProgressBar"></div>
+        </div>
+
+        <div class="batch-progress-text">
+            <span id="batchProgressText">0%</span>
+        </div>
+
+    <div class="grid">
+
+        <!-- LIVE TRAFFIC GRAPH -->
+
+        <div class="panel">
+
+            <div class="panel-title">
+                <h2>Live Traffic Monitor</h2>
+                <span id="lastUpdated">Updating...</span>
+            </div>
+
+            <div class="graph-box">
+                <canvas id="trafficChart"></canvas>
+            </div>
+
+        </div>
+
+
+        <!-- SERVER HEALTH -->
+
+        <div class="panel health-panel">
+
+            <div class="panel-title">
+                <h2>Server Health</h2>
+                <span>Automatic monitoring</span>
+            </div>
+
+            <div class="health-big">
+
+                <div id="healthCircle" class="health-circle">
+                    NORMAL
+                </div>
+
+                <div id="healthMessage" class="health-message">
+                    Traffic is under control.<br>
+                    The result server is protected.
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LIVE TRAFFIC FLOW -->
+
+        <div class="panel flow-panel">
+
+            <div class="panel-title">
+                <h2>Live Traffic Flow</h2>
+                <span>Request pipeline</span>
+            </div>
+
+            <div class="flow">
+
+                <div class="flow-box">
+                    <div class="flow-icon">📥</div>
+                    <div class="flow-name">INCOMING</div>
+                    <div id="flowIncoming" class="flow-number">0</div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box">
+                    <div class="flow-icon">⚙️</div>
+                    <div class="flow-name">PROCESSING</div>
+                    <div id="flowProcessing" class="flow-number">0</div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box">
+                    <div class="flow-icon">🚦</div>
+                    <div class="flow-name">QUEUE</div>
+                    <div id="flowQueue" class="flow-number">0</div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box">
+                    <div class="flow-icon">🖥️</div>
+                    <div class="flow-name">RESULT SERVER</div>
+                    <div id="flowServer" class="flow-number">8000</div>
+                </div>
+
+                <div class="arrow">→</div>
+
+                <div class="flow-box">
+                    <div class="flow-icon">✓</div>
+                    <div class="flow-name">COMPLETED</div>
+                    <div id="flowCompleted" class="flow-number">0</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM STATUS -->
+
+        <div class="panel">
+
+            <div class="panel-title">
+                <h2>System Status</h2>
+                <span id="connectionStatus">Connected</span>
+            </div>
+
+            <div style="line-height:2.1;font-size:13px;color:#9da8c4">
+
+                <div>
+                    Traffic Manager:
+                    <strong style="color:#48e59a">ONLINE</strong>
+                </div>
+
+                <div>
+                    Result Server:
+                    <strong style="color:#48e59a">ONLINE</strong>
+                </div>
+
+                <div>
+                    Maximum Active:
+                    <strong id="systemMax">2</strong>
+                </div>
+
+                <div>
+                    Queue Protection:
+                    <strong style="color:#48e59a">ENABLED</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- QUEUE MONITOR -->
+
+    <div class="panel queue-panel">
+
+        <div class="panel-title">
+            <h2>Queue Monitor</h2>
+            <span>Live requests</span>
+        </div>
+
+        <div id="queueList" class="queue-list">
+            <div class="empty">No active requests</div>
+        </div>
+
+    </div>
+
+<style>
+.middle-live-cards{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:22px auto;padding:0 12px}
+.middle-live-card{width:190px;padding:16px;text-align:center;border-radius:14px;border:1px solid rgba(127,127,127,.2);background:rgba(127,127,127,.06);border:1px solid rgba(127,127,127,.25);box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.middle-live-card small{opacity:.7}.middle-live-card b{display:block;font-size:24px;margin-top:6px}
+</style>
+<div class="middle-live-cards">
+  <div class="middle-live-card"><small>Live Capacity</small><b id="middleCapacity">16</b></div>
+  <div class="middle-live-card"><small>Utilization</small><b id="middleUtilization">0%</b></div>
+  <div class="middle-live-card"><small>Traffic Forecast</small><b id="middleForecast">NORMAL</b></div>
+</div>
+<script>
+async function updateMiddleCards(){
+ try{
+  const r=await fetch("http://127.0.0.1:8001/");
+  const d=await r.json();
+  const c=d.processing_capacity ?? 16;
+  const a=d.active_requests ?? 0;
+  const u=d.processing_utilization ?? (c ? a/c*100 : 0);
+  document.getElementById("middleCapacity").textContent=c;
+  document.getElementById("middleUtilization").textContent=Math.round(u)+"%";
+  document.getElementById("middleForecast").textContent=(u>=90||d.queue_size>=10)?"SPIKE":(u>=75||d.queue_size>=5)?"HIGH":"NORMAL";
+ }catch(e){}
+}
+updateMiddleCards();setInterval(updateMiddleCards,3000);
+</script>
+
+    <!-- REQUEST HISTORY -->
+
+    <div class="panel history-panel">
+
+        <div class="panel-title">
+            <div>
+
+                <h2>Request History</h2>
+                <span>Completed & failed requests</span>
+            </div>
+
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <button
+                    type="button"
+                    onclick="refreshHistory()"
+                    style="
+                        background:#4f7cff;
+                        color:white;
+                        border:none;
+                        padding:10px 16px;
+                        border-radius:8px;
+                        cursor:pointer;
+                        font-weight:600;
+                    "
+                >
+                    🔄 Refresh History
+                </button>
+
+                <button
+                    id="deleteHistoryBtn"
+                    onclick="deleteHistory()"
+                    style="
+                        background:#ff4d4d;
+                        color:white;
+                        border:none;
+                        padding:10px 16px;
+                        border-radius:8px;
+                        cursor:pointer;
+                        font-weight:600;
+                    "
+                >
+                    🗑️ Delete History
+                </button>
+            </div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:15px;">
+    <input
+        id="historySearch"
+        type="text"
+        placeholder="Enter Roll Number..."
+        style="
+            flex:1;
+            box-sizing:border-box;
+            background:#111827;
+            color:white;
+            border:1px solid #374151;
+            padding:12px 14px;
+            border-radius:8px;
+            font-size:14px;
+            outline:none;
+        "
+    >
+
+    <button
+        onclick="filterHistory()"
+        style="
+            background:#4f7cff;
+            color:white;
+            border:none;
+            padding:12px 20px;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:600;
+        "
+    >
+        🔎 Search
+    </button>
+</div>
+
+        <div class="history-summary">
+            <strong id="historyTotal">0</strong>
+            <span>Total history records</span>
+        </div>
+
+        <div class="history-table-wrapper">
+
+            <table class="history-table">
+
+                <thead>
+                    <tr>
+                        <th>Date & Time</th><th>Roll No.</th>
+                        <th>Status</th>
+                        <th>Student</th>
+                        <th>Result</th>
+                        <th>Marks</th>
+                    </tr>
+                </thead>
+
+                <tbody id="historyList">
+
+                    <tr>
+                        <td colspan="5" class="empty">
+                            No history yet
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Smart Result Traffic Manager • Local Prototype
+    </div>
+
+</div>
+
+<script>
+
+const TRAFFIC_MANAGER = "http://127.0.0.1:8001";
+
+let graphData = [];
+let maxPoints = 40;
+
+/* ---------------- GRAPH ---------------- */
+
+const canvas = document.getElementById("trafficChart");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    canvas.width = rect.width * window.devicePixelRatio;
+    canvas.height = rect.height * window.devicePixelRatio;
+
+    ctx.scale(
+        window.devicePixelRatio,
+        window.devicePixelRatio
+    );
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function drawGraph() {
+
+    const width = canvas.clientWidth;
+    const height = canvas.clientHeight;
+
+    ctx.clearRect(0, 0, width, height);
+
+    /* GRID */
+
+    ctx.strokeStyle = "#202c43";
+    ctx.lineWidth = 1;
+
+    for(let i = 0; i <= 5; i++) {
+
+        const y = 20 + i * ((height - 40) / 5);
+
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.stroke();
+    }
+
+    if(graphData.length < 2)
+        return;
+
+    const maxValue =
+        Math.max(5, ...graphData);
+
+    ctx.beginPath();
+
+    graphData.forEach((value, index) => {
+
+        const x =
+            index * (width / (maxPoints - 1));
+
+        const y =
+            height - 25 -
+            (value / maxValue) *
+            (height - 50);
+
+        if(index === 0)
+            ctx.moveTo(x, y);
+        else
+            ctx.lineTo(x, y);
+
+    });
+
+    ctx.strokeStyle = "#4e78ff";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    /* POINTS */
+
+    graphData.forEach((value, index) => {
+
+        const x =
+            index * (width / (maxPoints - 1));
+
+        const y =
+            height - 25 -
+            (value / maxValue) *
+            (height - 50);
+
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, Math.PI * 2);
+
+        ctx.fillStyle = "#4e78ff";
+        ctx.fill();
+
+    });
+}
+
+/* ---------------- HEALTH ---------------- */
+
+function updateHealth(queue) {
+
+    const badge =
+        document.getElementById("healthBadge");
+
+    const text =
+        document.getElementById("healthText");
+
+    const circle =
+        document.getElementById("healthCircle");
+
+    const message =
+        document.getElementById("healthMessage");
+
+    badge.className = "health";
+
+    if(queue <= 2) {
+
+        badge.classList.add("normal");
+
+        text.textContent = "NORMAL";
+
+        circle.textContent = "NORMAL";
+        circle.style.borderColor = "#48e59a";
+        circle.style.color = "#48e59a";
+
+        message.innerHTML =
+            "Traffic is under control.<br>" +
+            "The result server is protected.";
+
+    }
+    else if(queue <= 5) {
+
+        badge.classList.add("busy");
+
+        text.textContent = "BUSY";
+
+        circle.textContent = "BUSY";
+        circle.style.borderColor = "#ffd45c";
+        circle.style.color = "#ffd45c";
+
+        message.innerHTML =
+            "Traffic is increasing.<br>" +
+            "Requests are being queued safely.";
+
+    }
+    else {
+
+        badge.classList.add("critical");
+
+        text.textContent = "CRITICAL";
+
+        circle.textContent = "CRITICAL";
+        circle.style.borderColor = "#ff6377";
+        circle.style.color = "#ff6377";
+
+        message.innerHTML =
+            "Heavy traffic detected.<br>" +
+            "Queue protection is active.";
+
+    }
+}
+
+/* ---------------- STATUS ---------------- */
+
+async function loadStatus() {
+
+    try {
+
+        const response =
+            await fetch(
+`${TRAFFIC_MANAGER}/`            );
+
+        if(!response.ok)
+            throw new Error("Connection failed");
+
+        const data =
+            await response.json();
+
+        updateDashboard(data);
+
+        document.getElementById(
+            "connectionStatus"
+        ).textContent = "Connected";
+
+    }
+    catch(error) {
+
+        document.getElementById(
+            "connectionStatus"
+        ).textContent = "Disconnected";
+
+    }
+}
+
+/* ---------------- DASHBOARD ---------------- */
+
+let lastHistoryCount = null;
+
+function updateDashboard(data) {
+
+    const total =
+        data.total_requests ?? 0;
+
+    const active =
+        data.active_requests ?? 0;
+
+const queue =
+    data.queue_size ?? 0;
+    const completed =
+        data.completed_requests ?? 0;
+
+    const failed =
+        data.failed_requests ?? 0;
+
+    const historyCount =
+        completed + failed;
+
+    if (
+        lastHistoryCount !== null &&
+        historyCount !== lastHistoryCount
+    ) {
+        loadHistory();
+    }
+
+    lastHistoryCount = historyCount;
+
+    const maximum =
+        data.processing_capacity ??
+        data.maximum_active ??
+        2;
+
+    document.getElementById(
+        "totalRequests"
+    ).textContent = total;
+
+    document.getElementById(
+        "activeRequests"
+    ).textContent = active;
+
+    document.getElementById(
+        "waitingQueue"
+    ).textContent = queue;
+
+    document.getElementById(
+        "completedRequests"
+    ).textContent = completed;
+
+    document.getElementById(
+        "failedRequests"
+    ).textContent = failed;
+
+    document.getElementById(
+        "maxActive"
+    ).textContent = maximum;
+
+    document.getElementById(
+        "systemMax"
+    ).textContent = maximum;
+
+    document.getElementById(
+        "flowIncoming"
+    ).textContent = total;
+
+    document.getElementById(
+        "flowProcessing"
+    ).textContent = active;
+
+    document.getElementById(
+        "flowQueue"
+    ).textContent = queue;
+
+    document.getElementById(
+        "flowCompleted"
+    ).textContent = completed;
+
+    graphData.push(active + queue);
+
+    if(graphData.length > maxPoints)
+        graphData.shift();
+
+    drawGraph();
+
+    updateHealth(queue);
+
+    document.getElementById(
+        "lastUpdated"
+    ).textContent =
+        "Last updated: " +
+        new Date().toLocaleTimeString();
+
+    // -------------------------
+    // CONTINUOUS PROCESSING
+    // -------------------------
+
+    const progress =
+        data.total_requests > 0
+            ? Math.min(
+                100,
+                Math.round(
+                    (data.completed_requests / data.total_requests) * 100
+                )
+              )
+            : 0;
+
+    document.getElementById(
+        "currentBatch"
+    ).textContent =
+        `${progress}%`;
+
+    document.getElementById(
+        "batchProgressBar"
+    ).style.width = `${progress}%`;
+
+    document.getElementById(
+        "batchProgressText"
+    ).textContent =
+        `${progress}% completed`;
+
+    loadQueue();
+}
+
+/* ---------------- HISTORY SEARCH ---------------- */
+
+function filterHistory() {
+    const input = document.getElementById("historySearch");
+    const list = document.getElementById("historyList");
+
+    if (!input || !list) return;
+
+    const search = input.value.trim().toLowerCase();
+
+    const rows = Array.from(
+        list.querySelectorAll("tr")
+    ).filter(row => row.id !== "historyNoResults");
+
+    let found = false;
+
+    rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+
+        if (cells.length < 5) {
+            row.style.display = "none";
+            return;
+        }
+
+        const rowText =
+            row.textContent.trim().toLowerCase();
+
+        const match =
+            search === "" ||
+            rowText.includes(search);
+
+        row.style.display = match ? "" : "none";
+
+        if (match) {
+            found = true;
+        }
+    });
+
+    let noResults =
+        document.getElementById("historyNoResults");
+
+    if (!noResults) {
+        noResults = document.createElement("tr");
+        noResults.id = "historyNoResults";
+        noResults.innerHTML = `
+            <td colspan="5" class="empty">
+                🔍 No matching records found
+            </td>
+        `;
+        list.appendChild(noResults);
+    }
+
+    noResults.style.display =
+        search !== "" && !found ? "" : "none";
+}
+/* ---------------- HISTORY ---------------- */
+
+async function deleteHistory() {
+
+    const confirmed = confirm(
+        "Are you sure you want to delete all request history?"
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${TRAFFIC_MANAGER}/history/delete`,
+            {
+                method: "POST"
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+
+            alert("Request history deleted successfully.");
+
+            loadHistory();
+
+        } else {
+
+            alert(
+                data.message ||
+                "Failed to delete history."
+            );
+        }
+
+    } catch (error) {
+
+        document.getElementById("historyTotal").textContent = "ERROR"; console.error(
+            "History deletion failed:",
+            error
+        );
+
+        alert(
+            "Could not connect to Traffic Manager."
+        );
+    }
+}
+
+
+async function refreshHistory() {
+    const searchBox =
+        document.getElementById("historySearch");
+
+    if (searchBox) {
+        searchBox.value = "";
+    }
+
+    await loadHistory();
+}
+
+async function loadHistory() {
+
+    try {
+
+        const response =
+            await fetch(`${TRAFFIC_MANAGER}/history`);
+
+        const data =
+            await response.json();
+
+        const history =
+            data.history || [];
+
+        document.getElementById(
+            "historyTotal"
+        ).textContent = history.length;
+
+        const list =
+            document.getElementById("historyList");
+
+        if (!history.length) {
+
+            list.innerHTML =
+                `<tr>
+                    <td colspan="5" class="empty">
+                        No history yet
+                    </td>
+                </tr>`;
+
+            return;
+        }
+
+        list.innerHTML = history
+            .slice()
+            .reverse()
+            .map(item => {
+
+                const result =
+                    item.result?.result || {};
+
+                const studentName =
+                    result.name || "—";
+
+                const resultStatus =
+                    result.status || "—";
+
+                const marks =
+                    result.marks ?? "—";
+
+                const statusClass =
+                    item.status === "COMPLETED"
+                        ? "status-completed"
+                        : "status-failed";
+
+                return `
+                    <tr>
+                        <td>${item.timestamp || item.created_at || "—"}</td><td>${item.roll_number}</td>
+                        <td>
+                            <span class="${statusClass}">
+                                ${item.status}
+                            </span>
+                        </td>
+                        <td>${studentName}</td>
+                        <td>${resultStatus}</td>
+                        <td>${marks}</td>
+                    </tr>
+                `;
+
+            })
+            .join("");
+
+        // Keep the current search after history refresh
+        const searchBox =
+            document.getElementById("historySearch");
+
+        if (searchBox && searchBox.value.trim()) {
+            filterHistory();
+        }
+
+    }
+    catch(error) {
+
+        document.getElementById("historyTotal").textContent = "ERROR"; console.error(
+            "History loading failed:",
+            error
+        );
+
+    }
+
+}
+
+/* ---------------- QUEUE ---------------- */
+
+async function loadQueue() {
+
+    try {
+
+        const statsResponse =
+            await fetch(`${TRAFFIC_MANAGER}/`);
+
+        const stats =
+            await statsResponse.json();
+
+        const queueResponse =
+            await fetch(`${TRAFFIC_MANAGER}/queue`);
+
+        const queueData =
+            await queueResponse.json();
+
+        const waitingRequests =
+            queueData.queue || [];
+
+        const processingCount =
+            stats.active_requests ?? 0;
+
+        const list =
+            document.getElementById("queueList");
+
+        if (!waitingRequests.length && processingCount === 0) {
+
+            list.innerHTML =
+                `<div class="empty">
+                    No active requests
+                </div>`;
+
+            return;
+        }
+
+        list.innerHTML = "";
+
+        if (processingCount > 0) {
+
+            for (let i = 0; i < processingCount; i++) {
+
+                const row =
+                    document.createElement("div");
+
+                row.className = "queue-item";
+
+                row.innerHTML = `
+                    <div class="queue-number">
+                        ${i + 1}
+                    </div>
+
+                    <div class="roll">
+                        Processing request
+                    </div>
+
+                    <div>
+                        -
+                    </div>
+
+                    <div class="status PROCESSING">
+                        PROCESSING
+                    </div>
+                `;
+
+                list.appendChild(row);
+            }
+        }
+
+        waitingRequests.forEach((item, index) => {
+
+            const row =
+                document.createElement("div");
+
+            row.className = "queue-item";
+
+            row.innerHTML = `
+                <div class="queue-number">
+                    ${processingCount + index + 1}
+                </div>
+
+                <div class="roll">
+                    Roll No: ${item.roll_number || "-"}
+                </div>
+
+                <div>
+                    ${item.request_id
+                        ? item.request_id.substring(0,8)
+                        : "-"}
+                </div>
+
+                <div class="status WAITING">
+                    WAITING
+                </div>
+            `;
+
+            list.appendChild(row);
+
+        });
+
+    }
+    catch(error) {
+
+        console.log("Queue error:", error);
+
+    }
+}
+/* ---------------- TRAFFIC TEST ---------------- */
+
+async function startTrafficTest() {
+
+    const rollNumbers = [
+        "10001",
+        "10002",
+        "10003",
+        "10004",
+        "10001",
+        "10002",
+        "10003",
+        "10004",
+        "10001",
+        "10002"
+    ];
+
+    for(const roll of rollNumbers) {
+
+        fetch(
+            `${TRAFFIC_MANAGER}/check-result`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+                body: JSON.stringify({
+                    roll_number: roll
+                })
+            }
+        ).catch(error =>
+            console.log(error)
+        );
+
+        await new Promise(
+            resolve => setTimeout(resolve, 100)
+        );
+    }
+}
+
+/* ---------------- RESET ---------------- */
+
+async function resetStatistics() {
+
+    try {
+
+        await fetch(
+            `${TRAFFIC_MANAGER}/reset`,
+            {
+                method: "POST"
+            }
+        );
+
+        graphData = [];
+
+        drawGraph();
+
+        await loadStatus();
+        await updateAIReleaseStatus();
+
+    }
+    catch(error) {
+
+        alert(
+            "Unable to reset statistics."
+        );
+
+    }
+}
+
+/* ---------------- START ---------------- */
+
+loadStatus();
+loadHistory();
+
+setInterval(
+    loadStatus,
+    1000
+);
+
+</script>
+
+
+
+
+<script>
+let aiCountdownTimer = null;
+
+function startAICountdown(releaseTime, initialSeconds) {
+    const status = document.getElementById("aiReleaseStatus");
+
+    if (aiCountdownTimer) {
+        clearInterval(aiCountdownTimer);
+    }
+
+    let remaining = Number(initialSeconds) || 0;
+
+    function updateCountdown() {
+        if (remaining > 0) {
+            status.innerHTML =
+                "✅ <b>Release registered</b><br>" +
+                "Release time: " + releaseTime + "<br>" +
+                "⏳ Preparation: " + remaining + " seconds";
+
+            remaining--;
+        } else {
+            status.innerHTML =
+                "🚀 <b>AI RELEASE TIME REACHED</b><br>" +
+                "Release time: " + releaseTime + "<br>" +
+                "🤖 AI is now ready.";
+            
+            clearInterval(aiCountdownTimer);
+            aiCountdownTimer = null;
+
+            updateAIReleaseStatus();
+        }
+    }
+
+    updateCountdown();
+    aiCountdownTimer = setInterval(updateCountdown, 1000);
+}
+
+
+async function updateAIReleaseStatus() {
+    const status = document.getElementById("aiLiveStatus");
+
+    if (!status) return;
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:8001/",
+            {
+                cache: "no-store"
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+
+        const data = await response.json();
+
+        const aiStatus = data.ai_release_status || "IDLE";
+        const aiMode = data.ai_mode || "STANDBY";
+
+        status.innerHTML =
+            "🤖 <b>AI Status: " + aiStatus + "</b><br>" +
+            "Mode: " + aiMode;
+
+    } catch (error) {
+        status.innerHTML =
+            "⚠️ AI live status temporarily unavailable.<br>" +
+            "Release controller is still running.";
+    }
+}
+
+
+async function registerAIRelease() {
+    const input = document.getElementById("aiReleaseCommand");
+    const status = document.getElementById("aiReleaseStatus");
+    const button = document.getElementById("aiReleaseButton");
+
+    const command = input.value.trim();
+
+    if (!command) {
+        status.textContent =
+            "Please enter a release command.";
+        return;
+    }
+
+    button.disabled = true;
+
+    status.textContent =
+        "🤖 AI is processing the release command...";
+
+    try {
+        const response = await fetch(
+            "http://127.0.0.1:8001/ai-release",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    command: command
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (data.success) {
+            startAICountdown(
+                data.release_time,
+                data.preparation_seconds
+            );
+
+            updateAIReleaseStatus();
+        } else {
+            status.innerHTML =
+                "❌ " +
+                (data.error ||
+                 "Unable to register release.");
+        }
+
+    } catch (error) {
+        status.innerHTML =
+            "❌ AI controller connection failed.";
+    } finally {
+        button.disabled = false;
+    }
+}
+
+
+setInterval(updateAIReleaseStatus, 1000);
+updateAIReleaseStatus();
+
+</script>
+
+</body>
+</html>

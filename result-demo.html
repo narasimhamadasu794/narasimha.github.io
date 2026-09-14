@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Exam Results</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #163b63, transparent 35%),
+                radial-gradient(circle at bottom right, #16244d, transparent 35%),
+                #070d18;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Background animation */
+        .grid {
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(0, 200, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 200, 255, 0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveGrid 15s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes moveGrid {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(40px);
+            }
+        }
+
+        .container {
+            width: min(900px, 92%);
+            margin: auto;
+            padding: 45px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 75px;
+            height: 75px;
+            margin: auto;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            background: linear-gradient(135deg, #00d4ff, #4776ff);
+            box-shadow: 0 0 35px rgba(0, 212, 255, 0.35);
+        }
+
+        h1 {
+            margin-top: 18px;
+            font-size: clamp(28px, 6vw, 46px);
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            color: #91a4c0;
+            margin-top: 8px;
+            font-size: 15px;
+        }
+
+        /* System status */
+        .system-status {
+            width: fit-content;
+            margin: 22px auto;
+            padding: 9px 18px;
+            border: 1px solid rgba(0, 255, 170, 0.3);
+            background: rgba(0, 255, 170, 0.07);
+            border-radius: 50px;
+            color: #54f5b0;
+            font-size: 13px;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 9px;
+            height: 9px;
+            background: #36f5a0;
+            border-radius: 50%;
+            margin-right: 7px;
+            box-shadow: 0 0 12px #36f5a0;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: .4;
+                transform: scale(.7);
+            }
+        }
+
+        /* Main card */
+        .card {
+            background: rgba(12, 22, 39, 0.88);
+            border: 1px solid rgba(120, 170, 220, 0.15);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(15px);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card-description {
+            color: #8295b1;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        /* Input */
+        label {
+            display: block;
+            color: #aebed3;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        input {
+            flex: 1;
+            min-width: 0;
+            padding: 16px;
+            border-radius: 13px;
+            border: 1px solid #29405f;
+            background: #091321;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: .25s;
+        }
+
+        input:focus {
+            border-color: #00cfff;
+            box-shadow: 0 0 0 3px rgba(0, 207, 255, .1);
+        }
+
+        button {
+            border: none;
+            border-radius: 13px;
+            padding: 0 25px;
+            font-size: 15px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            background: linear-gradient(135deg, #00bfff, #526cff);
+            box-shadow: 0 10px 25px rgba(55, 120, 255, .25);
+            transition: .25s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(55, 120, 255, .4);
+        }
+
+        button:active {
+            transform: scale(.98);
+        }
+
+        button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Status */
+        .status-box {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 18px;
+            background: #091525;
+            border: 1px solid #203958;
+        }
+
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .status-title {
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            background: rgba(0, 190, 255, .12);
+            color: #4bdcff;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .queue-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .queue-item {
+            background: #0d1c2e;
+            border-radius: 13px;
+            padding: 18px;
+            border: 1px solid #1a304b;
+        }
+
+        .queue-label {
+            color: #7e92ae;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .queue-value {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* Progress */
+        .progress {
+            margin-top: 20px;
+            height: 7px;
+            background: #17283c;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 45%;
+            background: linear-gradient(90deg, #00d4ff, #536dff);
+            border-radius: 20px;
+            animation: loading 1.5s infinite alternate;
+        }
+
+        @keyframes loading {
+            from {
+                width: 25%;
+            }
+            to {
+                width: 75%;
+            }
+        }
+
+        /* Result */
+        .result-box {
+            display: none;
+            margin-top: 25px;
+            border-radius: 20px;
+            padding: 25px;
+            background: linear-gradient(
+                145deg,
+                rgba(0, 210, 150, .09),
+                rgba(25, 35, 65, .8)
+            );
+            border: 1px solid rgba(50, 230, 170, .25);
+            animation: resultAppear .5s ease;
+        }
+
+        @keyframes resultAppear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-title {
+            color: #54f5b0;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .result-item {
+            padding: 16px;
+            border-radius: 13px;
+            background: rgba(5, 15, 28, .6);
+        }
+
+        .result-label {
+            color: #8295ad;
+            font-size: 12px;
+            margin-bottom: 6px;
+        }
+
+        .result-value {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Error */
+        .error-box {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 13px;
+            background: rgba(255, 70, 90, .08);
+            border: 1px solid rgba(255, 70, 90, .25);
+            color: #ff8796;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: #566b87;
+            font-size: 12px;
+            margin-top: 25px;
+        }
+
+        /* Mobile */
+        @media (max-width: 650px) {
+            .container {
+                padding: 25px 0;
+            }
+
+            .card {
+                padding: 20px;
+                border-radius: 20px;
+            }
+
+            .input-row {
+                flex-direction: column;
+            }
+
+            button {
+                height: 52px;
+            }
+
+            .queue-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-header {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="grid"></div>
+
+<div class="container">
+
+    <div class="header">
+
+        <div class="logo">🎓</div>
+
+        <h1>Smart Exam Results</h1>
+
+        <div class="subtitle">
+            Smart Traffic & Queue Management System
+        </div>
+
+        <div class="system-status">
+            <span class="dot"></span>
+            SYSTEM ONLINE
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="card-title">
+            Check Your Examination Result
+        </div>
+
+        <div class="card-description">
+            Enter your roll number. If traffic is high, our smart queue
+            automatically manages your request.
+        </div>
+
+        <label for="examType">Examination</label>
+
+        <select id="examType" style="width:100%; padding:16px; margin-bottom:15px; border-radius:13px; border:1px solid #29405f; background:#091321; color:white; font-size:16px; outline:none;">
+
+            <option value="ssc">10th / SSC</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="eapcet">EAPCET / AP EAMCET</option>
+
+        </select>
+
+        <label for="rollNumber">Roll Number</label>
+
+        <div class="input-row">
+
+            <input
+                type="text"
+                id="rollNumber"
+                placeholder="Enter your roll number"
+                autocomplete="off"
+            >
+
+            <button id="checkButton" onclick="checkResult()">
+                CHECK RESULT
+            </button>
+
+        </div>
+
+
+        <!-- Status -->
+        <div class="status-box" id="statusBox">
+
+            <div class="status-header">
+
+                <div class="status-title" id="statusTitle">
+                    Processing Request
+                </div>
+
+                <div class="status-badge" id="statusBadge">
+                    WAITING
+                </div>
+
+            </div>
+
+
+            <div class="queue-grid">
+
+                <div class="queue-item">
+
+                    <div class="queue-label">
+                        Queue Position
+                    </div>
+
+                    <div class="queue-value" id="queuePosition">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="queue-item">
+
+                    <div class="queue-label">
+                        Students Ahead
+                    </div>
+
+                    <div class="queue-value" id="studentsAhead">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="progress">
+                <div class="progress-bar"></div>
+            </div>
+
+        </div>
+
+
+        <!-- Result -->
+        <div class="result-box" id="resultBox">
+
+            <div class="result-title">
+                ✓ Result Ready
+            </div>
+
+            <div class="result-grid">
+
+                <div class="result-item">
+
+                    <div class="result-label">
+                        Name
+                    </div>
+
+                    <div class="result-value" id="studentName">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <div class="result-label">
+                        Roll Number
+                    </div>
+
+                    <div class="result-value" id="resultRoll">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="result-item" id="subjectMarksBox">
+
+                    <div class="result-label">
+                        Subject Marks
+                    </div>
+
+                    <div id="subjectMarks"></div>
+
+                </div>
+
+                <div class="result-item">
+
+                    <div class="result-label">
+                        Total Marks
+                    </div>
+
+                    <div class="result-value" id="studentMarks">
+                        -
+                    </div>
+
+                </div>
+
+                <div class="result-item" id="rankBox" style="display:none;">
+
+                    <div class="result-label">
+                        EAPCET Rank
+                    </div>
+
+                    <div class="result-value" id="studentRank">
+                        -
+                    </div>
+
+                </div>
+
+
+                <div class="result-item">
+
+                    <div class="result-label">
+                        Status
+                    </div>
+
+                    <div class="result-value" id="studentStatus">
+                        -
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Error -->
+        <div class="error-box" id="errorBox"></div>
+
+    </div>
+
+
+    <div class="footer">
+        Smart Result Traffic Manager • Local Test System
+    </div>
+
+</div>
+
+
+<script>
+
+const TRAFFIC_MANAGER = "http://127.0.0.1:8001";
+
+let currentRequestId = null;
+let pollTimer = null;
+
+
+function checkResult() {
+
+    const rollNumber =
+        document.getElementById("rollNumber").value.trim();
+
+    const button =
+        document.getElementById("checkButton");
+
+    const statusBox =
+        document.getElementById("statusBox");
+
+    const resultBox =
+        document.getElementById("resultBox");
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+
+    if (!rollNumber) {
+
+        showError("Please enter your roll number.");
+
+        return;
+    }
+
+
+    clearError();
+
+    resultBox.style.display = "none";
+
+    statusBox.style.display = "block";
+
+    button.disabled = true;
+
+    button.textContent = "PROCESSING...";
+
+
+    fetch(`${TRAFFIC_MANAGER}/check-result`, {
+
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+            roll_number: rollNumber,
+            exam_type: document.getElementById("examType").value
+        })
+
+    })
+
+    .then(response => {
+
+        if (!response.ok) {
+            throw new Error("Request failed");
+        }
+
+        return response.json();
+
+    })
+
+    .then(data => {
+
+        currentRequestId = data.request_id;
+
+        updateStatus(data);
+
+        startPolling();
+
+    })
+
+    .catch(error => {
+
+        console.error(error);
+
+        showError(
+            "Unable to connect to the result system."
+        );
+
+        resetButton();
+
+    });
+
+}
+
+
+function startPolling() {
+
+    if (pollTimer) {
+        clearInterval(pollTimer);
+    }
+
+    pollTimer = setInterval(() => {
+
+        if (!currentRequestId) {
+            return;
+        }
+
+        fetch(
+            `${TRAFFIC_MANAGER}/status/${currentRequestId}`
+        )
+
+        .then(response => response.json())
+
+        .then(data => {
+
+            updateStatus(data);
+
+        })
+
+        .catch(error => {
+
+            console.error(error);
+
+        });
+
+    }, 1000);
+
+}
+
+
+function updateStatus(data) {
+
+    const statusBox =
+        document.getElementById("statusBox");
+
+    const statusTitle =
+        document.getElementById("statusTitle");
+
+    const statusBadge =
+        document.getElementById("statusBadge");
+
+    const queuePosition =
+        document.getElementById("queuePosition");
+
+    const studentsAhead =
+        document.getElementById("studentsAhead");
+
+
+    statusBox.style.display = "block";
+
+
+    if (data.status === "WAITING") {
+
+        statusTitle.textContent =
+            "Your request is in the queue";
+
+        statusBadge.textContent =
+            "WAITING";
+
+        queuePosition.textContent =
+            data.queue_position ?? "-";
+
+        studentsAhead.textContent =
+            data.students_ahead ?? "-";
+
+    }
+
+
+    else if (data.status === "PROCESSING") {
+
+        statusTitle.textContent =
+            "Your result is being processed";
+
+        statusBadge.textContent =
+            "PROCESSING";
+
+        queuePosition.textContent =
+            "ACTIVE";
+
+        studentsAhead.textContent =
+            "0";
+
+    }
+
+
+    else if (data.status === "COMPLETED") {
+
+        statusTitle.textContent =
+            "Result successfully loaded";
+
+        statusBadge.textContent =
+            "COMPLETED";
+
+        queuePosition.textContent =
+            "✓";
+
+        studentsAhead.textContent =
+            "0";
+
+        showResult(data);
+
+        stopPolling();
+
+        resetButton();
+
+    }
+
+
+    else if (data.status === "FAILED") {
+
+        stopPolling();
+
+        showError(
+            data.error || "Unable to process the result."
+        );
+
+        resetButton();
+
+    }
+
+}
+
+
+function showResult(data) {
+
+    const resultBox =
+        document.getElementById("resultBox");
+
+const result =
+    data.result?.result || data.result || {};
+    document.getElementById("studentName").textContent =
+        result.name || "-";
+
+
+    document.getElementById("resultRoll").textContent =
+        result.roll_number || "-";
+
+
+    const subjectMarks =
+        document.getElementById("subjectMarks");
+
+    const subjectMarksBox =
+        document.getElementById("subjectMarksBox");
+
+    const rankBox =
+        document.getElementById("rankBox");
+
+    const studentRank =
+        document.getElementById("studentRank");
+
+    subjectMarks.innerHTML = "";
+
+    if (result.subjects) {
+
+        subjectMarksBox.style.display = "block";
+
+        Object.entries(result.subjects).forEach(
+            ([subject, marks]) => {
+
+                const row =
+                    document.createElement("div");
+
+                row.className = "result-item";
+
+                row.innerHTML =
+                    `<span>${subject} = ${marks}</span>`;
+
+                subjectMarks.appendChild(row);
+            }
+        );
+
+    } else {
+
+        subjectMarksBox.style.display = "none";
+    }
+
+    document.getElementById("studentMarks").textContent =
+        result.total ?? result.marks ?? "-";
+
+    if (result.rank !== undefined) {
+
+        rankBox.style.display = "flex";
+        studentRank.textContent = result.rank;
+
+    } else {
+
+        rankBox.style.display = "none";
+        studentRank.textContent = "-";
+    }
+
+    document.getElementById("studentStatus").textContent =
+        result.status || "-";
+
+
+    resultBox.style.display = "block";
+
+}
+
+
+function stopPolling() {
+
+    if (pollTimer) {
+
+        clearInterval(pollTimer);
+
+        pollTimer = null;
+
+    }
+
+}
+
+
+function resetButton() {
+
+    const button =
+        document.getElementById("checkButton");
+
+    button.disabled = false;
+
+    button.textContent =
+        "CHECK RESULT";
+
+}
+
+
+function showError(message) {
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    errorBox.textContent = message;
+
+    errorBox.style.display = "block";
+
+}
+
+
+function clearError() {
+
+    const errorBox =
+        document.getElementById("errorBox");
+
+    errorBox.textContent = "";
+
+    errorBox.style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>
