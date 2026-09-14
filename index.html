@@ -2137,6 +2137,493 @@ footer{
     }
 }
 
+
+
+/* =========================================================
+   NEXAITORA — MOBILE REDESIGN ONLY
+   Desktop design remains unchanged
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .container,
+    .nav-container,
+    .hero-inner,
+    .hero-bottom {
+        width: calc(100% - 32px);
+    }
+
+    /* NAVIGATION */
+
+    .navbar {
+        height: 64px;
+    }
+
+    .nav-container {
+        justify-content: flex-end;
+    }
+
+    .brand {
+        display: none;
+    }
+
+    .nav-links {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 7px;
+    }
+
+    .nav-links a {
+        font-size: 10px;
+    }
+
+    .nav-links a:not(.nav-product) {
+        display: none;
+    }
+
+    .nav-product {
+        padding: 9px 13px;
+        border-radius: 8px;
+        font-size: 10px !important;
+    }
+
+    /* HERO */
+
+    .hero {
+        min-height: auto;
+        padding-top: 64px;
+        padding-bottom: 55px;
+    }
+
+    .hero-inner {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        padding-top: 55px;
+        padding-bottom: 0;
+    }
+
+    .hero-copy {
+        width: 100%;
+        padding-top: 0;
+        text-align: left;
+    }
+
+    .hero-label {
+        margin-bottom: 19px;
+        font-size: 8px;
+        letter-spacing: 1.5px;
+        padding: 7px 11px;
+    }
+
+    .hero h1 {
+        max-width: 100%;
+        font-size: clamp(38px, 11vw, 48px);
+        line-height: 1;
+        letter-spacing: -2.5px;
+        margin-bottom: 22px;
+    }
+
+    .hero-description {
+        max-width: 100%;
+        font-size: 13px;
+        line-height: 1.75;
+        margin-bottom: 25px;
+    }
+
+    .hero-actions {
+        width: 100%;
+    }
+
+    .hero-actions .btn {
+        width: auto;
+    }
+
+    /* SYSTEM VISUAL */
+
+    .hero-visual {
+        width: 100%;
+        height: 290px;
+        margin-top: 5px;
+    }
+
+    .system-sphere {
+        width: 255px;
+        height: 255px;
+    }
+
+    .system-sphere:before {
+        inset: 28px;
+    }
+
+    .system-sphere:after {
+        inset: 64px;
+    }
+
+    .center-logo {
+        display: none;
+    }
+
+    .orbit-one {
+        width: 220px;
+        height: 105px;
+    }
+
+    .orbit-two {
+        width: 105px;
+        height: 220px;
+    }
+
+    .system-label {
+        display: none;
+    }
+
+    .node-a {
+        top: 45px;
+        left: 78px;
+    }
+
+    .node-b {
+        right: 27px;
+        top: 112px;
+    }
+
+    .node-c {
+        bottom: 48px;
+        right: 75px;
+    }
+
+    .node-d {
+        bottom: 82px;
+        left: 28px;
+    }
+
+    /* ALL SECTIONS */
+
+    .introduction,
+    .vision,
+    .product,
+    .approach,
+    .technology,
+    .cta,
+    .founder-section {
+        padding: 65px 0;
+    }
+
+    .section-tag {
+        font-size: 8px;
+        letter-spacing: 1.7px;
+    }
+
+    .intro-title,
+    .section-heading h2,
+    .product-header h2,
+    .approach-title,
+    .tech-head h2 {
+        font-size: 31px;
+        line-height: 1.1;
+        letter-spacing: -1.2px;
+    }
+
+    /* ABOUT */
+
+    .intro-layout {
+        gap: 25px;
+    }
+
+    .intro-copy p {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    /* VISION */
+
+    .section-heading {
+        margin-bottom: 32px;
+    }
+
+    .section-heading p {
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    .vision-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .vision-card {
+        min-height: auto;
+        padding: 24px;
+    }
+
+    .vision-number {
+        margin-bottom: 30px;
+    }
+
+    /* PRODUCT */
+
+    .product-header {
+        display: block;
+        margin-bottom: 30px;
+    }
+
+    .product-header p {
+        max-width: 100%;
+        margin-top: 15px;
+        font-size: 12px;
+    }
+
+    .product-card {
+        grid-template-columns: 1fr;
+        border-radius: 16px;
+    }
+
+    .product-info {
+        padding: 27px 23px;
+    }
+
+    .product-info h3 {
+        font-size: 27px;
+    }
+
+    .product-info p {
+        font-size: 12px;
+        line-height: 1.8;
+    }
+
+    .product-points {
+        gap: 6px;
+    }
+
+    .product-points span {
+        font-size: 8px;
+    }
+
+    .product-visual {
+        min-height: 285px;
+    }
+
+    .network {
+        transform: scale(.72);
+    }
+
+    /* APPROACH */
+
+    .approach-grid {
+        gap: 32px;
+    }
+
+    .approach-description {
+        font-size: 13px;
+        line-height: 1.8;
+    }
+
+    .step {
+        grid-template-columns: 42px 1fr;
+        gap: 12px;
+        padding: 20px 17px;
+    }
+
+    .step h3 {
+        font-size: 15px;
+    }
+
+    .step p {
+        font-size: 10px;
+    }
+
+    /* TECHNOLOGY */
+
+    .tech-head {
+        margin-bottom: 32px;
+    }
+
+    .tech-head p {
+        font-size: 12px;
+    }
+
+    .tech-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .tech-item {
+        min-height: 95px;
+        font-size: 9px;
+        padding: 10px;
+    }
+
+    /* FOUNDER */
+
+    .founder-title {
+        margin-bottom: 28px;
+    }
+
+    .founder-title h2 {
+        font-size: 32px;
+    }
+
+    .founder-card {
+        grid-template-columns: 1fr;
+        gap: 25px;
+        padding: 25px 18px;
+        border-radius: 18px;
+        text-align: center;
+    }
+
+    .founder-photo {
+        width: 165px;
+        height: 195px;
+    }
+
+    .founder-name {
+        font-size: 24px;
+        line-height: 1.2;
+    }
+
+    .founder-role {
+        font-size: 14px;
+    }
+
+    .founder-company {
+        font-size: 12px;
+    }
+
+    .founder-ai p {
+        font-size: 12px;
+        line-height: 1.75;
+        margin-top: 15px;
+    }
+
+    .founder-contact {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 20px;
+    }
+
+    .contact-item {
+        width: 100%;
+        font-size: 11px;
+        padding: 10px;
+    }
+
+    /* CTA */
+
+    .cta-box {
+        min-height: 280px;
+        padding: 30px 18px;
+        border-radius: 18px;
+    }
+
+    .cta-box h2 {
+        font-size: 31px;
+        letter-spacing: -1.2px;
+    }
+
+    .cta-box p {
+        font-size: 12px;
+        line-height: 1.75;
+    }
+
+    /* FOOTER */
+
+    .footer-main {
+        width: calc(100% - 32px);
+        flex-direction: column;
+        gap: 28px;
+        padding: 38px 0 28px;
+    }
+
+    .footer-logo {
+        display: none;
+    }
+
+    .footer-description {
+        max-width: 100%;
+        font-size: 10px;
+    }
+
+    .footer-links {
+        gap: 16px;
+    }
+
+    .footer-links a {
+        font-size: 10px;
+    }
+
+    .footer-bottom {
+        width: calc(100% - 32px);
+        flex-direction: column;
+        gap: 8px;
+        padding: 17px 0;
+        font-size: 8px;
+    }
+}
+
+@media (max-width: 420px) {
+
+    .hero-inner,
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .hero h1 {
+        font-size: 38px;
+        letter-spacing: -2px;
+    }
+
+    .hero-description {
+        font-size: 12px;
+    }
+
+    .hero-visual {
+        height: 270px;
+    }
+
+    .system-sphere {
+        width: 235px;
+        height: 235px;
+    }
+
+    .orbit-one {
+        width: 200px;
+        height: 95px;
+    }
+
+    .orbit-two {
+        width: 95px;
+        height: 200px;
+    }
+
+    .intro-title,
+    .section-heading h2,
+    .product-header h2,
+    .approach-title,
+    .tech-head h2 {
+        font-size: 29px;
+    }
+
+    .tech-grid {
+        gap: 7px;
+    }
+
+    .tech-item {
+        min-height: 88px;
+    }
+
+    .founder-photo {
+        width: 150px;
+        height: 180px;
+    }
+}
+
+
 </style>
 </head>
 
