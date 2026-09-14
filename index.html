@@ -2146,210 +2146,23 @@ footer{
 
 @media (max-width:700px){
 
-    /* MOBILE — SAME BLUE THEME AS DESKTOP */
+    /* =====================================================
+       NEXAITORA — PROFESSIONAL MOBILE EXPERIENCE
+       Desktop design remains unchanged
+       ===================================================== */
+
+    /* ---------- BASE ---------- */
 
     body{
         background:
-            radial-gradient(
-                circle at 75% 10%,
-                rgba(15,151,230,.17),
-                transparent 28%
-            ),
-            radial-gradient(
-                circle at 10% 55%,
-                rgba(8,102,180,.13),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #020817,
-                #041a34 50%,
-                #020817
-            );
+            radial-gradient(circle at 85% 0%, rgba(35,170,235,.18), transparent 30%),
+            radial-gradient(circle at 0% 35%, rgba(18,105,190,.14), transparent 32%),
+            linear-gradient(180deg, #020817 0%, #041a34 48%, #020b19 100%);
         color:var(--white);
     }
 
     body:before{
         display:none;
-    }
-
-    .navbar{
-        background:rgba(2,10,24,.82);
-        border-bottom:1px solid var(--line);
-    }
-
-    .hero{
-        background:
-            radial-gradient(
-                circle at 72% 45%,
-                rgba(17,155,230,.14),
-                transparent 32%
-            ),
-            linear-gradient(
-                135deg,
-                #020817 0%,
-                #041b36 55%,
-                #031022 100%
-            );
-    }
-
-    .introduction{
-        background:
-            linear-gradient(
-                135deg,
-                #04172f,
-                #062241 52%,
-                #04152c
-            );
-    }
-
-    .vision{
-        background:
-            linear-gradient(
-                180deg,
-                #031126,
-                #041a34
-            );
-    }
-
-    .product{
-        background:
-            radial-gradient(
-                circle at 80% 40%,
-                rgba(17,145,216,.10),
-                transparent 30%
-            ),
-            linear-gradient(
-                135deg,
-                #020d20,
-                #06203e,
-                #031329
-            );
-    }
-
-    .approach{
-        background:
-            linear-gradient(
-                135deg,
-                #031329,
-                #062342,
-                #031329
-            );
-    }
-
-    .technology{
-        background:
-            radial-gradient(
-                circle at center,
-                rgba(13,112,180,.10),
-                transparent 35%
-            ),
-            linear-gradient(
-                180deg,
-                #020d20,
-                #04182f
-            );
-    }
-
-    .founder-section{
-        background:
-            radial-gradient(
-                circle at 15% 50%,
-                rgba(60,130,255,.08),
-                transparent 45%
-            );
-    }
-
-    .cta{
-        background:
-            linear-gradient(
-                135deg,
-                #031329,
-                #062342,
-                #031329
-            );
-    }
-
-    footer{
-        background:
-            linear-gradient(
-                135deg,
-                #020817,
-                #041a34,
-                #020817
-            );
-    }
-
-    .vision-card{
-        background:
-            linear-gradient(
-                145deg,
-                rgba(10,45,76,.82),
-                rgba(5,26,49,.92)
-            );
-        border-color:rgba(88,194,239,.13);
-    }
-
-    .product-card{
-        background:
-            linear-gradient(
-                135deg,
-                rgba(8,44,75,.72),
-                rgba(4,22,43,.86)
-            );
-        border-color:rgba(95,200,242,.13);
-    }
-
-    .step{
-        background:
-            linear-gradient(
-                90deg,
-                rgba(7,40,69,.94),
-                rgba(5,29,54,.94)
-            );
-    }
-
-    .tech-item{
-        background:
-            linear-gradient(
-                145deg,
-                rgba(7,42,72,.82),
-                rgba(4,25,48,.88)
-            );
-    }
-
-    .founder-card{
-        background:rgba(255,255,255,.025);
-        border-color:rgba(255,255,255,.08);
-    }
-
-    .cta-box{
-        background:
-            radial-gradient(
-                circle at 50% 20%,
-                rgba(29,156,224,.22),
-                transparent 33%
-            ),
-            linear-gradient(
-                135deg,
-                #061b38,
-                #082b50
-            );
-    }
-
-    .hero h1,
-    .intro-title,
-    .section-heading h2,
-    .product-header h2,
-    .approach-title,
-    .tech-head h2,
-    .founder-title h2,
-    .cta-box h2,
-    .product-info h3,
-    .founder-name{
-        text-shadow:
-            0 0 10px rgba(25,169,238,.18),
-            0 0 24px rgba(25,169,238,.10);
     }
 
     *{
@@ -2368,13 +2181,14 @@ footer{
         width:calc(100% - 30px);
     }
 
-    /* ---------- MOBILE NAV ---------- */
+    /* ---------- NAVBAR ---------- */
 
     .navbar{
         height:60px;
-        background:var(--bg);
-        backdrop-filter:blur(18px);
-        border-bottom:1px solid var(--line);
+        background:rgba(2,10,24,.90);
+        border-bottom:1px solid rgba(100,210,255,.16);
+        backdrop-filter:blur(16px);
+        -webkit-backdrop-filter:blur(16px);
     }
 
     .nav-container{
@@ -2400,6 +2214,7 @@ footer{
         display:inline-flex;
         align-items:center;
         justify-content:center;
+        min-height:36px;
         padding:9px 15px;
         border-radius:9px;
         font-size:9px!important;
@@ -2412,6 +2227,10 @@ footer{
         min-height:auto;
         padding:60px 0 0;
         position:relative;
+        overflow:hidden;
+        background:
+            radial-gradient(circle at 82% 24%, rgba(25,169,238,.16), transparent 34%),
+            linear-gradient(160deg, #020817 0%, #06213f 58%, #031329 100%);
     }
 
     .hero-inner{
@@ -2445,6 +2264,7 @@ footer{
         font-size:clamp(43px,13vw,58px);
         line-height:.91;
         letter-spacing:-3px;
+        text-shadow:0 0 22px rgba(84,210,255,.16);
     }
 
     .hero-description{
@@ -2499,10 +2319,7 @@ footer{
         height:178px;
     }
 
-    .center-logo{
-        display:none;
-    }
-
+    .center-logo,
     .system-label{
         display:none;
     }
@@ -2537,7 +2354,48 @@ footer{
     .founder-section,
     .cta{
         padding:68px 0;
+        overflow:hidden;
     }
+
+    .introduction{
+        background:
+            linear-gradient(160deg, #04172f 0%, #062646 55%, #03162b 100%);
+    }
+
+    .vision{
+        background:
+            linear-gradient(180deg, #031126 0%, #06203b 100%);
+    }
+
+    .product{
+        background:
+            radial-gradient(circle at 85% 20%, rgba(25,169,238,.12), transparent 32%),
+            linear-gradient(160deg, #020d20 0%, #062442 58%, #031329 100%);
+    }
+
+    .approach{
+        background:
+            linear-gradient(160deg, #031329 0%, #072846 55%, #031329 100%);
+    }
+
+    .technology{
+        background:
+            radial-gradient(circle at 50% 15%, rgba(18,145,215,.13), transparent 35%),
+            linear-gradient(180deg, #020d20 0%, #041c36 100%);
+    }
+
+    .founder-section{
+        background:
+            radial-gradient(circle at 15% 40%, rgba(50,140,230,.10), transparent 42%),
+            linear-gradient(180deg, #031329 0%, #020b19 100%);
+    }
+
+    .cta{
+        background:
+            linear-gradient(160deg, #031329 0%, #082a4b 55%, #031329 100%);
+    }
+
+    /* ---------- SECTION HEADINGS ---------- */
 
     .section-tag{
         display:inline-block;
@@ -2554,6 +2412,7 @@ footer{
         font-size:32px;
         line-height:1;
         letter-spacing:-1.8px;
+        text-shadow:0 0 22px rgba(84,210,255,.16);
     }
 
     /* ---------- ABOUT ---------- */
@@ -2587,10 +2446,29 @@ footer{
         gap:10px;
     }
 
+    /* ---------- PREMIUM CARDS ---------- */
+
+    .vision-card,
+    .product-card,
+    .step,
+    .tech-item{
+        background:
+            linear-gradient(
+                145deg,
+                rgba(10,48,82,.88),
+                rgba(4,25,48,.94)
+            ) !important;
+        border:1px solid rgba(100,210,255,.14);
+        box-shadow:
+            0 12px 32px rgba(0,0,0,.18),
+            inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
     .vision-card{
         min-height:0;
         padding:23px 20px;
         border-radius:14px;
+        transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
     }
 
     .vision-number{
@@ -2638,6 +2516,7 @@ footer{
         font-size:26px;
         line-height:1.05;
         letter-spacing:-1px;
+        text-shadow:0 0 22px rgba(84,210,255,.16);
     }
 
     .product-info p{
@@ -2687,10 +2566,13 @@ footer{
     }
 
     .step{
+        display:grid;
         grid-template-columns:35px 1fr;
         gap:11px;
         padding:18px 14px;
         border-radius:12px;
+        margin-bottom:9px;
+        transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
     }
 
     .step h3{
@@ -2716,6 +2598,7 @@ footer{
     }
 
     .tech-grid{
+        display:grid;
         grid-template-columns:1fr 1fr;
         gap:8px;
     }
@@ -2726,6 +2609,7 @@ footer{
         border-radius:11px;
         font-size:8px;
         line-height:1.4;
+        transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
     }
 
     /* ---------- FOUNDER ---------- */
@@ -2738,6 +2622,7 @@ footer{
         font-size:32px;
         line-height:1;
         letter-spacing:-1.8px;
+        text-shadow:0 0 22px rgba(84,210,255,.16);
     }
 
     .founder-card{
@@ -2745,6 +2630,16 @@ footer{
         padding:26px 17px;
         border-radius:16px;
         text-align:center;
+        background:
+            linear-gradient(
+                145deg,
+                rgba(14,48,78,.72),
+                rgba(5,25,47,.88)
+            ) !important;
+        border:1px solid rgba(100,210,255,.14);
+        box-shadow:
+            0 12px 32px rgba(0,0,0,.18),
+            inset 0 1px 0 rgba(255,255,255,.035);
     }
 
     .founder-photo{
@@ -2757,6 +2652,7 @@ footer{
     .founder-name{
         font-size:23px;
         line-height:1.15;
+        text-shadow:0 0 22px rgba(84,210,255,.16);
     }
 
     .founder-role{
@@ -2796,12 +2692,28 @@ footer{
         padding:32px 19px;
         border-radius:17px;
         text-align:center;
+        background:
+            radial-gradient(
+                circle at 50% 0%,
+                rgba(35,175,240,.22),
+                transparent 38%
+            ),
+            linear-gradient(
+                145deg,
+                #06213f,
+                #092f54
+            ) !important;
+        border:1px solid rgba(100,210,255,.18);
+        box-shadow:
+            0 16px 40px rgba(0,0,0,.22),
+            inset 0 1px 0 rgba(255,255,255,.04);
     }
 
     .cta-box h2{
         font-size:32px;
         line-height:1;
         letter-spacing:-1.8px;
+        text-shadow:0 0 22px rgba(84,210,255,.16);
     }
 
     .cta-box p{
@@ -2819,6 +2731,11 @@ footer{
     }
 
     /* ---------- FOOTER ---------- */
+
+    footer{
+        background:
+            linear-gradient(180deg, #020817 0%, #03182e 100%);
+    }
 
     .footer-main{
         width:calc(100% - 30px);
@@ -2857,6 +2774,30 @@ footer{
         font-size:7px;
         line-height:1.5;
         text-align:center;
+    }
+
+    /* ---------- TOUCH FEEDBACK ---------- */
+
+    .vision-card:active,
+    .product-card:active,
+    .tech-item:active,
+    .step:active{
+        transform:translateY(-2px);
+        border-color:rgba(84,210,255,.28);
+        box-shadow:
+            0 16px 34px rgba(0,0,0,.22),
+            inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    /* ---------- REDUCED MOTION ---------- */
+
+    @media (prefers-reduced-motion: reduce){
+        .vision-card,
+        .product-card,
+        .tech-item,
+        .step{
+            transition:none;
+        }
     }
 }
 
