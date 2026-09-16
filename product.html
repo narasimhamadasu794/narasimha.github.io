@@ -1531,6 +1531,21 @@ footer{
 }
 
 @media(max-width:600px){
+    .traffic-visual .node-circle{
+        width:90px;
+        height:90px;
+    }
+
+    .traffic-visual .system-node{
+        font-size:14px;
+    }
+
+    .traffic-visual .node-circle svg{
+        width:30px;
+        height:30px;
+    }
+
+
 
     .hero{
         overflow:hidden;
@@ -1553,11 +1568,13 @@ footer{
     }
 
     .traffic-visual{
-        transform:scale(.58);
-        transform-origin:center top;
-        height:300px;
+        width:100%;
+        max-width:none;
+        height:390px;
+        transform:none;
         margin-top:45px;
-        margin-bottom:-45px;
+        margin-bottom:20px;
+        overflow:hidden;
     }
 
     .queue-row{
