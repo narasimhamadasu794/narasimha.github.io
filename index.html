@@ -154,14 +154,15 @@ body:before{
 
     border-bottom:1px solid var(--line);
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
 }
 
 .nav-container{
-    width:min(var(--max),92%);
+    width:94%;
+    max-width:none;
     height:100%;
-    margin:auto;
+    margin:0 auto;
 
     display:flex;
     align-items:center;
@@ -173,9 +174,17 @@ body:before{
     align-items:center;
 }
 
+.brand{
+    display:flex;
+    align-items:center;
+    width:auto;
+    height:56px;
+    overflow:hidden;
+}
+
 .brand img{
-    width:178px;
-    height:54px;
+    width:135px;
+    height:50px;
     object-fit:contain;
     display:block;
 }
@@ -338,8 +347,7 @@ body:before{
 .hero h1 .blue{
     color:#43c2f7;
 
-    text-shadow:
-        0 0 35px rgba(54,185,240,.20);
+    text-shadow:none;
 }
 
 .hero-description{
@@ -467,8 +475,7 @@ body:before{
             transparent 72%
         );
 
-    box-shadow:
-        0 0 100px rgba(17,142,214,.09),
+    box-shadow:0 1px 8px rgba(0,0,0,0.08),
         inset 0 0 80px rgba(16,135,203,.08);
 }
 
@@ -748,8 +755,7 @@ body:before{
 
     margin-top:28px;
 
-    box-shadow:
-        0 0 15px rgba(21,155,234,.45);
+    box-shadow:0 1px 8px rgba(0,0,0,0.08);
 }
 
 
@@ -1144,8 +1150,7 @@ body:before{
 
     border:1px solid rgba(86,201,247,.40);
 
-    box-shadow:
-        0 0 35px rgba(31,164,225,.24);
+    box-shadow:0 1px 8px rgba(0,0,0,0.08);
 }
 
 .network-center:before{
@@ -1211,8 +1216,7 @@ body:before{
 
     background:#43bff4;
 
-    box-shadow:
-        0 0 18px rgba(67,191,244,.8);
+    box-shadow:0 1px 8px rgba(0,0,0,0.08);
 }
 
 .nn1{
@@ -1708,10 +1712,10 @@ footer{
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE DISABLED — DESKTOP LAYOUT USED ON MOBILE
    ========================================================= */
 
-@media(max-width:1000px){
+@media(max-width:0px){
 
     .hero-inner{
         grid-template-columns:1fr;
@@ -1762,7 +1766,7 @@ footer{
 }
 
 
-@media(max-width:700px){
+@media(max-width:0px){
 
     .navbar{
         height:68px;
@@ -1927,7 +1931,7 @@ footer{
 }
 
 
-@media(max-width:420px){
+@media(max-width:0px){
 
     .hero h1{
         font-size:39px;
@@ -2042,7 +2046,7 @@ footer{
     width:100%;
     height:100%;
     object-fit:cover;
-    display:none;
+    display:block;
 }
 
 .founder-photo.has-photo::after{
@@ -2105,7 +2109,7 @@ footer{
     border-color:rgba(94,156,255,.35);
 }
 
-@media(max-width:900px){
+@media(max-width:0px){
     .founder-card{
         grid-template-columns:1fr;
         text-align:center;
@@ -2118,7 +2122,7 @@ footer{
     }
 }
 
-@media(max-width:600px){
+@media(max-width:0px){
     .founder-section{
         padding:75px 0;
     }
@@ -2144,7 +2148,7 @@ footer{
    Desktop design remains unchanged
    ========================================================= */
 
-@media (max-width:700px){
+@media(max-width:0px){
 
     /* =====================================================
        NEXAITORA — PROFESSIONAL MOBILE EXPERIENCE
@@ -2187,8 +2191,8 @@ footer{
         height:60px;
         background:rgba(2,10,24,.90);
         border-bottom:1px solid rgba(100,210,255,.16);
-        backdrop-filter:blur(16px);
-        -webkit-backdrop-filter:blur(16px);
+        backdrop-filter:blur(4px);
+        -webkit-backdrop-filter:blur(4px);
     }
 
     .nav-container{
@@ -2264,7 +2268,7 @@ footer{
         font-size:clamp(43px,13vw,58px);
         line-height:.91;
         letter-spacing:-3px;
-        text-shadow:0 0 22px rgba(84,210,255,.16);
+        text-shadow:none;
     }
 
     .hero-description{
@@ -2412,7 +2416,7 @@ footer{
         font-size:32px;
         line-height:1;
         letter-spacing:-1.8px;
-        text-shadow:0 0 22px rgba(84,210,255,.16);
+        text-shadow:none;
     }
 
     /* ---------- ABOUT ---------- */
@@ -2516,7 +2520,7 @@ footer{
         font-size:26px;
         line-height:1.05;
         letter-spacing:-1px;
-        text-shadow:0 0 22px rgba(84,210,255,.16);
+        text-shadow:none;
     }
 
     .product-info p{
@@ -2622,7 +2626,7 @@ footer{
         font-size:32px;
         line-height:1;
         letter-spacing:-1.8px;
-        text-shadow:0 0 22px rgba(84,210,255,.16);
+        text-shadow:none;
     }
 
     .founder-card{
@@ -2652,7 +2656,7 @@ footer{
     .founder-name{
         font-size:23px;
         line-height:1.15;
-        text-shadow:0 0 22px rgba(84,210,255,.16);
+        text-shadow:none;
     }
 
     .founder-role{
@@ -2713,7 +2717,7 @@ footer{
         font-size:32px;
         line-height:1;
         letter-spacing:-1.8px;
-        text-shadow:0 0 22px rgba(84,210,255,.16);
+        text-shadow:none;
     }
 
     .cta-box p{
@@ -2801,6 +2805,22 @@ footer{
     }
 }
 
+    /* ---------- MOBILE — SUBTLE HEADING GLOW ---------- */
+
+    .hero h1,
+    .intro-title,
+    .section-heading h2,
+    .product-header h2,
+    .approach-title,
+    .tech-head h2,
+    .founder-title h2,
+    .cta-box h2,
+    .product-info h3,
+    .founder-name{
+        text-shadow:none !important;
+    }
+
+
 @media (max-width:420px){
 
     .container,
@@ -2887,16 +2907,14 @@ footer{
 .tech-head h2,
 .founder-title h2,
 .cta-box h2{
-    text-shadow:
-        0 0 10px rgba(25,169,238,.18),
+    text-shadow:none,
         0 0 24px rgba(25,169,238,.10);
 }
 
 /* HERO MAIN TITLE */
 
 .hero h1{
-    text-shadow:
-        0 0 8px rgba(84,210,255,.28),
+    text-shadow:none,
         0 0 22px rgba(25,169,238,.20),
         0 0 45px rgba(25,169,238,.10);
 }
@@ -2909,8 +2927,7 @@ footer{
 .product-points span,
 .founder-role,
 .founder-company{
-    text-shadow:
-        0 0 8px rgba(84,210,255,.45),
+    text-shadow:none,
         0 0 18px rgba(25,169,238,.25);
 }
 
@@ -2924,8 +2941,7 @@ footer{
 }
 
 .btn:hover{
-    box-shadow:
-        0 0 12px rgba(25,169,238,.35),
+    box-shadow:0 1px 8px rgba(0,0,0,0.08),
         0 0 30px rgba(25,169,238,.18);
 }
 
@@ -2956,35 +2972,31 @@ footer{
 /* PRODUCT TITLE */
 
 .product-info h3{
-    text-shadow:
-        0 0 10px rgba(84,210,255,.22),
+    text-shadow:none,
         0 0 25px rgba(25,169,238,.12);
 }
 
 /* FOUNDER NAME */
 
 .founder-name{
-    text-shadow:
-        0 0 9px rgba(84,210,255,.22),
+    text-shadow:none,
         0 0 22px rgba(25,169,238,.12);
 }
 
 /* CTA */
 
 .cta-box h2{
-    text-shadow:
-        0 0 10px rgba(84,210,255,.28),
+    text-shadow:none,
         0 0 25px rgba(25,169,238,.18),
         0 0 50px rgba(25,169,238,.08);
 }
 
 /* MOBILE GLOW BOOST */
 
-@media(max-width:700px){
+@media(max-width:0px){
 
     .hero h1{
-        text-shadow:
-            0 0 9px rgba(84,210,255,.38),
+        text-shadow:none,
             0 0 22px rgba(25,169,238,.25),
             0 0 42px rgba(25,169,238,.12);
     }
@@ -2996,15 +3008,13 @@ footer{
     .tech-head h2,
     .founder-title h2,
     .cta-box h2{
-        text-shadow:
-            0 0 8px rgba(84,210,255,.25),
+        text-shadow:none,
             0 0 20px rgba(25,169,238,.14);
     }
 
     .product-info h3,
     .founder-name{
-        text-shadow:
-            0 0 8px rgba(84,210,255,.25),
+        text-shadow:none,
             0 0 20px rgba(25,169,238,.14);
     }
 }
@@ -3030,6 +3040,7 @@ footer{
         >
 
             <img
+                src="nexaitora-logo.jpeg"
                 alt="NEXAITORA Technologies"
             >
 
@@ -3777,9 +3788,9 @@ footer{
 
 <div class="founder-card">
 
-<label class="founder-photo" for="founderPhotoInput">
+<label class="founder-photo has-photo" for="founderPhotoInput">
 
-<img id="founderPhotoPreview" alt="Founder photo">
+<img id="founderPhotoPreview" src="founder-photo.jpeg" alt="Founder photo">
 
 <span id="founderPhotoText">
 ADD PHOTO
@@ -3964,3 +3975,50 @@ if (founderPhotoInput) {
 
 </body>
 </html>
+
+
+
+
+<style id="mobile-image-fix">
+@media(max-width:0px) {
+
+    .brand {
+        display: flex !important;
+        align-items: center !important;
+        width: 120px !important;
+        height: 52px !important;
+        overflow: hidden !important;
+        flex-shrink: 0 !important;
+    }
+
+    .brand img {
+        display: block !important;
+        width: 120px !important;
+        height: 52px !important;
+        object-fit: contain !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    .founder-photo {
+        display: flex !important;
+        width: 132px !important;
+        height: 162px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: hidden !important;
+    }
+
+    .founder-photo img {
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+}
+</style>
