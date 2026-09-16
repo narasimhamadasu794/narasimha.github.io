@@ -1732,6 +1732,79 @@ li{
 }
 </style>
 
+
+
+<style id="final-mobile-traffic">
+@media (max-width:600px) {
+
+    .traffic-visual {
+        width:1080px !important;
+        max-width:none !important;
+
+        /* remove the unused black vertical space */
+        height:390px !important;
+
+        position:relative !important;
+        left:50% !important;
+        margin-left:-540px !important;
+        margin-right:0 !important;
+        margin-top:35px !important;
+        margin-bottom:-180px !important;
+
+        transform:scale(.40) !important;
+        transform-origin:center top !important;
+
+        background:rgba(255,255,255,.035) !important;
+        border:1px solid rgba(255,255,255,.14) !important;
+        border-radius:18px !important;
+        box-sizing:border-box !important;
+    }
+
+    .traffic-visual .node-circle {
+        width:82px !important;
+        height:82px !important;
+    }
+
+    .traffic-visual .node-manager .node-circle {
+        width:96px !important;
+        height:96px !important;
+    }
+
+    .traffic-visual .node-users {
+        left:10% !important;
+    }
+
+    .traffic-visual .node-ai {
+        left:29% !important;
+    }
+
+    .traffic-visual .node-manager {
+        left:48% !important;
+    }
+
+    .traffic-visual .node-queue {
+        left:67% !important;
+    }
+
+    .traffic-visual .node-server {
+        right:10% !important;
+    }
+
+    .traffic-visual .system-node {
+        font-size:14px !important;
+    }
+
+    .traffic-visual .node-circle svg {
+        width:30px !important;
+        height:30px !important;
+    }
+
+    .hero {
+        overflow:hidden !important;
+    }
+}
+</style>
+
 </head>
 
 <body>
