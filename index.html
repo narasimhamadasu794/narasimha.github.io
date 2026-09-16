@@ -3979,35 +3979,55 @@ if (founderPhotoInput) {
 
 
 
-<style id="mobile-image-fix">
-@media (max-width: 600px) {
+
+
+<style>
+@media (max-width: 700px) {
+
+    /* Keep all desktop content, but fit it to the phone */
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Header */
+    .navbar {
+        height: 68px;
+    }
+
+    .nav-container {
+        width: 100%;
+        padding: 0 14px;
+        box-sizing: border-box;
+    }
 
     .brand {
-        display: flex !important;
-        align-items: center !important;
-        width: 120px !important;
-        height: 52px !important;
-        overflow: hidden !important;
-        flex-shrink: 0 !important;
+        flex-shrink: 0;
     }
 
     .brand img {
-        display: block !important;
         width: 120px !important;
         height: 52px !important;
         object-fit: contain !important;
-        opacity: 1 !important;
-        visibility: visible !important;
+        display: block !important;
     }
 
+    .nav-links {
+        gap: 6px;
+    }
+
+    /* Keep navigation usable */
+    .nav-links a:not(.nav-product) {
+        display: none;
+    }
+
+    /* Founder */
     .founder-photo {
         display: flex !important;
         width: 132px !important;
         height: 162px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        align-items: center !important;
-        justify-content: center !important;
+        margin: 0 auto 21px !important;
         overflow: hidden !important;
     }
 
@@ -4016,8 +4036,24 @@ if (founderPhotoInput) {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
-        opacity: 1 !important;
-        visibility: visible !important;
+    }
+
+    /* Prevent content from becoming wider than phone */
+    .hero-inner,
+    .intro-layout,
+    .vision-grid,
+    .product-card,
+    .approach-grid,
+    .tech-grid,
+    .founder-card,
+    .cta-box,
+    .footer-main {
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    img {
+        max-width: 100%;
     }
 
 }
